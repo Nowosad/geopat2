@@ -1,4 +1,4 @@
-# GeoPAT 2.0 - the manual
+# GeoPAT 2.0
 
 ## Overview
 
