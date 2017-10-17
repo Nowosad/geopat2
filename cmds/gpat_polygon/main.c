@@ -241,12 +241,15 @@ int main(int argc, char **argv) {
     for(i=1; i<ninputs; i++) {
       EZGDAL_FRAMESET *fs = ezgdal_create_frameset_with_size(input_layers[i],nCats);
       for(j=0; j<nCats; j++)
-        ezgdal_add_frameset_frame(fs,
-                                frmsetCats->frame[j]->col1,
-                                frmsetCats->frame[j]->col2,
-                                frmsetCats->frame[j]->row1,
-                                frmsetCats->frame[j]->row2
-                               );
+        if(ezgdal_add_frameset_frame(fs,
+                                     frmsetCats->frame[j]->col1,
+                                     frmsetCats->frame[j]->col2,
+                                     frmsetCats->frame[j]->row1,
+                                     frmsetCats->frame[j]->row2
+                                    )==NULL) {
+            ezgdal_show_message(stderr,"No RAM to proceed!");
+            exit(EXIT_FAILURE);
+          }
       if(!input_layers[i]->is_no_data) {
         input_layers[i]->is_no_data = TRUE;
         input_layers[i]->no_data = DBL_MIN;
