@@ -175,8 +175,8 @@ double tsDTWP(double **signatures, int num_of_signatures, int size_of_signature,
   double **d;
   double *m_cd;
   double **cd;
-  double dist,len,pd,scale=1.0;
-  int n, dim, i;
+  double dist,pd,scale=1.0;
+  int n, dim, i, len;
 
   if(num_of_dims<1 || num_of_dims>2) return 0.0;
   if(num_of_signatures<2) return 0.0;
