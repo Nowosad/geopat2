@@ -147,10 +147,10 @@ int main(int argc, char *argv[])
     input_layer = (EZGDAL_LAYER *)malloc(sizeof(EZGDAL_LAYER));
     input_layer = ezgdal_open_layer((char *)(seg->sval[0]));
     if(input_layer==NULL) {
-      printf("\nCan not open file: '%s'\n\n", seg->sval[0]);
+      printf("\nCannot open file: '%s'\n\n", seg->sval[0]);
     }
 
-    printf("Preparing ... "); fflush(stdout);
+    printf("Preparing..."); fflush(stdout);
 
 	/* open and read grid */
     datainfo=malloc(sizeof(DATAINFO));

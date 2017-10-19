@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
       /* signature not found */
       if(sign_func==NULL || sign_len_func==NULL) {
         printf("\nWrong signature name: %s\n\n",sign->sval[0]);
-        printf("list of avalable signatures:\n");
+        printf("List of available signatures:\n");
         char *list = list_all_signatures();
         printf("\n%s\n",list);
         free(list);
@@ -120,14 +120,14 @@ int main(int argc, char **argv) {
 
     if(sign->count>0 && strcmp(sign->sval[0],"fdec")==0) {
       if((size_val != 0) && ((size_val & (~size_val + 1)) != size_val)) {
-        printf("\nFor full decomposition, size has to be a power of two.\n\n");
+        printf("\nFor the full decomposition, size has to be a power of two.\n\n");
         exit(0);
       }
     
       if(lvl->count>0) {
         level_val = lvl->ival[0];
         if(level_val<0 || (1<<(level_val-1))>size_val) {
-          printf("\nFor full decomposition, 2^level cannot be greater then size.\nThe 'level' parameter is corrected by program.\n\n");
+          printf("\nFor the full decomposition, 2^level cannot be greater then size.\nThe 'level' parameter is corrected by program.\n\n");
           level_val = 0;
         }
       }
@@ -140,7 +140,7 @@ int main(int argc, char **argv) {
       /* signature not found */
       if(norm_func==NULL) {
         printf("\nWrong signature name: %s\n\n",norm->sval[0]);
-        printf("list of avalable local normalization methods:\n");
+        printf("List of available local normalization methods:\n");
         char *list = list_all_normalization_methods();
         printf("\n%s\n",list);
         free(list);
@@ -157,7 +157,7 @@ int main(int argc, char **argv) {
     }
 
     if(!((x->count>0 && y->count>0) || (xy->count>0))) {
-      printf("\n%s\n\n", "User has to provide either x and y parameter or xy_file parameter.");
+      printf("\n%s\n\n", "User has to provide either x and y parameter or the xy_file parameter.");
       usage(argv[0],argtable);
     }
 
@@ -183,7 +183,7 @@ int main(int argc, char **argv) {
     }
     
 
-    printf("Calculating statistics ... "); fflush(stdout);
+    printf("Calculating statistics..."); fflush(stdout);
     for(i=0; i<ninputs; i++) {
       ezgdal_calc_layer_stats(input_layers[i]);
       double min = input_layers[i]->stats->min;
@@ -201,7 +201,7 @@ int main(int argc, char **argv) {
     }
 
     if(!ezgdal_is_bbox_ok(input_layers,ninputs)) {
-      printf("\nInput files have various extent and/or resolution!\n\n");
+      printf("\nInput files have various extents and/or resolutions!\n\n");
       usage(argv[0],argtable);
     }
 
@@ -213,7 +213,7 @@ int main(int argc, char **argv) {
     else
       f = fopen(out->sval[0],"w");
 
-    printf("Calculating signature ... "); fflush(stdout);
+    printf("Calculating signature..."); fflush(stdout);
 
     if(x->count>0 && y->count>0) {
       if(desc->count>0)

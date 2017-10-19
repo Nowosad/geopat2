@@ -125,7 +125,7 @@ int main(int argc, char **argv) {
     PALETTE *palette = NULL;
 
     struct arg_str  *inp   = arg_strn("i","input","<file_name>",2,2,"name of input files (GRID)");
-    struct arg_str  *out   = arg_str1("o","output","<file_name>","name of output file with similarity (TIFF)");
+    struct arg_str  *out   = arg_str1("o","output","<file_name>","name of an output file with similarity (TIFF)");
     struct arg_str  *mes   = arg_str0("m","measure","<measure_name>","similarity measure (use -l to list all measures; default 'jsd')");
     struct arg_lit  *mesl  = arg_lit0("l","list_measures","list all measures");
     struct arg_str  *pal   = arg_str0("p","palette","<file_name>","name of the file with colors definition (CSV)");
@@ -211,7 +211,7 @@ int main(int argc, char **argv) {
     dh1 = sml_open_layer((char *)(inp->sval[1]));
 
     if(!is_the_same_bbox_proj(dh0,dh1)) {
-      printf("\nInput files have different pojection or boundig box!\n\n");
+      printf("\nInput files have different projections or bounding boxes!\n\n");
       sml_close_layer(dh0);
       sml_close_layer(dh1);
       usage(argv[0],argtable);

@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
     }
 
     if(!((x->count>0 && y->count>0) || (xy->count>0))) {
-      printf("\n%s\n\n", "User has to provide either x and y parameter or xy_file parameter.");
+      printf("\n%s\n\n", "User has to provide either x and y parameter or the xy_file parameter.");
       usage(argv[0],argtable);
     }
 

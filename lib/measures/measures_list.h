@@ -5,7 +5,7 @@
  *
  * MODULE:	Similarity measures library
  * AUTHOR(S):	Pawel Netzel
- * COPYRIGHT:	(C) Space Informatics Lab, Univeristy of Cincinnati
+ * COPYRIGHT:	(C) Space Informatics Lab, University of Cincinnati
  *
  *		This program is free software under the GNU General Public
  *		License (>=v2). Read the file COPYING that comes with GRASS
@@ -63,7 +63,7 @@ measure_rec measures_list[] = {
 	{ "tsEUCP",  tsEUCP,      "periodic time series - euclidean distance" },
 	{ "tsDTW",   tsDTW,       "time series - Dynamic Time Warping distance" },
 	{ "tsDTWP",  tsDTWP,      "periodic time series - Dynamic Time Warping distance" },
-	{ "tsDTWPa", tsDTWPa,     "time series - Synchoronized Dynamic Time Warping distance" },
+	{ "tsDTWPa", tsDTWPa,     "time series - Synchronized Dynamic Time Warping distance" },
 	{ NULL, NULL, NULL }
 };
 

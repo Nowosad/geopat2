@@ -84,7 +84,7 @@ int main(int argc, char **argv) {
     for(i=0; i<inp->count; i++) {
       input_layers[i] = ezgdal_open_layer((char *)(inp->sval[i]));
       if(input_layers[i]==NULL) {
-        printf("\nCan not open file: '%s'\n\n", inp->sval[i]);
+        printf("\nCannot open file: '%s'\n\n", inp->sval[i]);
         usage(argv[0],argtable);
       }
     }

@@ -2,9 +2,9 @@
  *
  * MODULE:	segmentation of motifels grid
  * AUTHOR(S):	Jaroslaw Jasiewicz, Jacek Niesterowicz, Tomasz Stepinski
- * PURPOSE:	information retrival using categorical maps:
+ * PURPOSE:	information retrieval using categorical maps:
  *		compares grid of histograms
- * COPYRIGHT:	(C) Space Informatics Lab, Univeristy of Cincinnati
+ * COPYRIGHT:	(C) Space Informatics Lab, University of Cincinnati
  *
  *		This program is free software under the GNU General Public
  *		License (>=v2). Read the file COPYING that comes with GRASS
@@ -199,7 +199,7 @@ int swap_areas(HEXGRID* hx, LOCAL_PARAMS* pars, struct area** areas, int *result
 	} while(num_of_swapped_cells>(pars->swap_threshold*hx->nareas)); /* free parameter  move to menu instead of geometry*/
 
 	fprintf(stderr, "\b\b\b\b\b\b\b\b");
-	fprintf(stderr,"Num of swapped areas: %d... Done\n", total_num_of_swapped_cells);
+	fprintf(stderr,"Number of swapped areas: %d... Done\n", total_num_of_swapped_cells);
 	rebuild_areas(hx,pars,areas,results);
 	return 0;
 }

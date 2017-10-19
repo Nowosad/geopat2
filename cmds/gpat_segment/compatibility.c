@@ -2,7 +2,7 @@
  *
  * MODULE:	Compatibility with GRASS GeoPAT
  * AUTHOR(S):	Pawel Netzel
- * COPYRIGHT:	(C) Space Informatics Lab, Univeristy of Cincinnati
+ * COPYRIGHT:	(C) Space Informatics Lab, University of Cincinnati
  *
  *		This program is free software under the GNU General Public
  *		License (>=v2). Read the file COPYING that comes with GRASS
@@ -208,7 +208,7 @@ int read_signatures_to_memory(DATAINFO* d) {
     long int i = 0;
     void *row, *cell;
 
-    printf("Reading data: ...    0%%");
+    printf("Reading data... 0%%");
     ezgdal_show_progress(stdout,0,nrows);
     d->all_histograms=malloc(ncells*sizeof(double*));
     size = d->size_of_histogram*sizeof(double);

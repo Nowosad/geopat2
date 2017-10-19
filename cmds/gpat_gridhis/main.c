@@ -96,7 +96,7 @@ int main(int argc, char **argv) {
       /* signature not found */
       if(sign_func==NULL || sign_len_func==NULL) {
         printf("\nWrong signature name: %s\n\n",sig->sval[0]);
-        printf("list of avalable signatures:\n");
+        printf("List of available signatures:\n");
         char *list = list_all_signatures();
         printf("\n%s\n",list);
         free(list);
@@ -116,7 +116,7 @@ int main(int argc, char **argv) {
       /* signature not found */
       if(norm_func==NULL) {
         printf("\nWrong signature name: %s\n\n",norm->sval[0]);
-        printf("list of avalable local normalization methods:\n");
+        printf("List of available local normalization methods:\n");
         char *list = list_all_normalization_methods();
         printf("\n%s\n",list);
         free(list);
@@ -134,14 +134,14 @@ int main(int argc, char **argv) {
 
     if(sig->count>0 && strcmp(sig->sval[0],"fdec")==0) {
       if((size_val != 0) && ((size_val & (~size_val + 1)) != size_val)) {
-        printf("\nFor full decomposition, size has to be a power of two.\n\n");
+        printf("\nFor the full decomposition, size has to be a power of two.\n\n");
         exit(0);
       }
     
       if(lvl->count>0) {
         level_val = lvl->ival[0];
         if(level_val<0 || (1<<(level_val-1))>size_val) {
-          printf("\nFor full decomposition, 2^level cannot be greater then size.\nThe 'level' parameter is corrected by program.\n\n");
+          printf("\nFor the full decomposition, 2^level cannot be greater then size.\nThe 'level' parameter is corrected by program.\n\n");
           level_val = 0;
         }
       }
@@ -150,13 +150,13 @@ int main(int argc, char **argv) {
     if(shift->count > 0) {
       shift_val = shift->ival[0];
       if(shift_val<5) {
-        printf("\nShift can not be less then 5\n\n");
+        printf("\n'shift' can not be less then 5\n\n");
         exit(0);
       }
     }
 
     if(shift_val>size_val) {
-      printf("\n'shift' can not be geater then 'size' parameter\n\n");
+      printf("\n'shift' can not be greater then 'size' parameter\n\n");
       exit(0);
     }
 
@@ -182,7 +182,7 @@ int main(int argc, char **argv) {
     for(i=0; i<ninputs; i++) {
       input_layers[i] = ezgdal_open_layer((char *)(inp->sval[i]));
       if(input_layers[i]==NULL) {
-        printf("\nCan not open file: '%s'\n\n", inp->sval[i]);
+        printf("\nCannot open file: '%s'\n\n", inp->sval[i]);
         usage(argv[0],argtable);
       }
     }
@@ -220,7 +220,7 @@ int main(int argc, char **argv) {
     int *dims = (int *)malloc(sizeof(int));
     dims[0] = sign_len_func(input_layers, ninputs, level_val);
     if(dims[0]<0) {
-      printf("\nSignature lenght can not be determined!\n\n");
+      printf("\nSignature length cannot be determined!\n\n");
       usage(argv[0],argtable);
     }
     printf("Signature length: %d\n",dims[0]); fflush(stdout);
@@ -245,7 +245,7 @@ int main(int argc, char **argv) {
     sml_set_layer_description(dh, argv, argc);
 
     void *buf = sml_create_cell_row_buffer(dh);
-    printf("Calculating grid of signatures ...     "); fflush(stdout);
+    printf("Calculating grid of signatures..."); fflush(stdout);
     for(r=0; r<dh->file_win->rows; r++) {
 //printf("r: %d/%d\n",r,dh->file_win->rows); fflush(stdout);
       ezgdal_show_progress(stdout,r,dh->file_win->rows);
