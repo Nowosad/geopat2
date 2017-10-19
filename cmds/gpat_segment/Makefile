@@ -12,7 +12,7 @@ compatibility.c \
 list.c \
 cluster_growing.c \
 cluster_heterogeneity.c \
-cluster_hierarhical.c \
+cluster_hierarchical.c \
 cluster_minarea.c \
 cluster_seeds.c \
 hexagonal.c \

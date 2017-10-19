@@ -30,7 +30,7 @@
 /* ======================================================= */
 
 typedef enum {OUTPUT_LINKAGE,OPTION_REDUCTION,OPTION_LTHRESHOLD,OPTION_UTHRESHOLD,OPTION_SWAP,OPTION_WEIGHTS,OPTION_MEASURES,NUM_OF_LOCAL_OPTIONS} LOCAL_OPTIONS;
-typedef enum {FLAG_SMOOTHING,FLAG_COMPLETE,FLAG_GROWING,FLAG_HIERARHICAL,FLAG_THRESHOLD,FLAG_ALL,FLAG_QUAD,NUM_OF_LOCAL_FLAGS} LOCAL_FLAGS;
+typedef enum {FLAG_SMOOTHING,FLAG_COMPLETE,FLAG_GROWING,FLAG_HIERARCHICAL,FLAG_THRESHOLD,FLAG_ALL,FLAG_QUAD,NUM_OF_LOCAL_FLAGS} LOCAL_FLAGS;
 typedef enum {NORTH,SOUTH,WEST,EAST} DIRECTIONS;
 
 struct area {
@@ -158,7 +158,7 @@ int hex_refine(DATAINFO* d, HEXGRID* hx, LOCAL_PARAMS* p);
 /* main functions */
 unsigned* hex_find_seeds(HEXGRID* hx, LOCAL_PARAMS* p, struct area** areas, unsigned* num_of_seeds);
 int hex_region_growing(HEXGRID* hx, LOCAL_PARAMS* pars, struct area** areas, int *results, unsigned* seeds, unsigned num_of_seeds);
-int hex_hierarhical(HEXGRID* hx, LOCAL_PARAMS* pars, struct area** areas, int *results);
+int hex_hierarchical(HEXGRID* hx, LOCAL_PARAMS* pars, struct area** areas, int *results);
 int hex_minarea (HEXGRID* hx, LOCAL_PARAMS* pars, struct area** areas, int *results);
 
 /* in join */
