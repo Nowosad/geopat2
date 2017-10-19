@@ -20,7 +20,7 @@ double find_distance(HEXGRID* hx, LOCAL_PARAMS* pars, struct area* index, struct
 	return tmp_dist-min_similarity;
 }
 
-int hex_hierarhical(HEXGRID* hx, LOCAL_PARAMS* pars, struct area** areas, int *results)
+int hex_hierarchical(HEXGRID* hx, LOCAL_PARAMS* pars, struct area** areas, int *results)
 {
 	int i,j,num_of_pairs=0;
 	int index_segment,target_segment,tmp_index;
