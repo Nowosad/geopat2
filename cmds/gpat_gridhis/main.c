@@ -245,7 +245,7 @@ int main(int argc, char **argv) {
     sml_set_layer_description(dh, argv, argc);
 
     void *buf = sml_create_cell_row_buffer(dh);
-    printf("Calculating grid of signatures... "); fflush(stdout);
+    printf("Calculating grid of signatures...     "); fflush(stdout);
     for(r=0; r<dh->file_win->rows; r++) {
 //printf("r: %d/%d\n",r,dh->file_win->rows); fflush(stdout);
       ezgdal_show_progress(stdout,r,dh->file_win->rows);
