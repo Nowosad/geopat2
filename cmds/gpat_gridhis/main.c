@@ -126,7 +126,7 @@ int main(int argc, char **argv) {
 
     if(size->count > 0) {
       size_val = size->ival[0];
-      if(size_val<=10) {
+      if(size_val<10) {
         printf("\nSize can not be less then 10\n\n");
         exit(0);
       }
@@ -203,7 +203,7 @@ int main(int argc, char **argv) {
       ezgdal_create_all_frames(input_layers[i]->stripe,0,shift_val);
     }
 
-    printf("Calculating statistics... "); fflush(stdout);
+    printf("Calculating statistics...     "); fflush(stdout);
 #pragma omp parallel for
     for(i=0; i<ninputs; i++) {
       ezgdal_calc_layer_stats(input_layers[i]);
