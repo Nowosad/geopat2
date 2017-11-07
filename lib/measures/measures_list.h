@@ -53,13 +53,13 @@ measure_rec measures_list[] = {
 	{ "euc",  euclidean,      "Euclidean distance" },
 	{ "eucn", euclidean_norm, "Normalized euclidean distance" },
 	{ "wh",   wave_hedges,    "Wave-Hedges distance" },
+	{ "jac",  jaccard,        "Jaccard distance" },
 /*************************
  *
  *   Experimental code
  * 
 	{ "eucp", euclidean_period, "Normalized euclidean distance (periodic)" },
 	{ "cos",  cosine,         "Cosine distance" },
-	{ "jac",  jaccard,        "Jaccard distance" },
 	{ "roz",  rozicka,        "Rozicka distance" },
 	{ "rozp", rozickap,       "Rozicka distance (extended)" },
 	{ "hass", hassanat,       "Hassanat distance" },
