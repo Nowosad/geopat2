@@ -13,7 +13,6 @@
  *
  *****************************************************************************/
 
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -26,7 +25,6 @@
 #include "../../lib/argtable/argtable3.h"
 #include "../../lib/tools/libtools.h"
 
-
 void usage(char *progname, void *argtable) {
       printf("\nUsage:\n\t%s", progname);
       arg_print_syntax(stdout,argtable,"\n");
@@ -35,8 +33,6 @@ void usage(char *progname, void *argtable) {
       printf("\n");
       exit(0);
 }
-
-
 
 int main(int argc, char **argv) {
 
@@ -57,7 +53,6 @@ int main(int argc, char **argv) {
     struct arg_lit  *help = arg_lit0("h","help","print this help and exit");
     struct arg_end  *end  = arg_end(20);
     void* argtable[] = {inp,out,x,y,desc,xy,app,help,end};
-
 
     int nerrors = arg_parse(argc,argv,argtable);
 
@@ -115,7 +110,6 @@ int main(int argc, char **argv) {
 
     free(xybuf);
     sml_close_layer(dh_f);
-
 
 printf("OK\n");
 
