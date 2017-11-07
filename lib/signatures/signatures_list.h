@@ -45,10 +45,16 @@ signature_rec signatures_list[] = {
 	{ "cooc", coocurrence, coocurrence_len, "Spatial coocurrence of categories" },
 	{ "sdec", decomposition, decomposition_len, "Simple 2-level decomposition" },
 	{ "fdec", full_decomposition, full_decomposition_len, "Full decomposition" },
-	{ "lbp", local_binary_pattern, local_binary_pattern_len, "Histogram of local binary patterns" },
 	{ "lind", landind, landind_len, "Landscape indices vector" },
 	{ "linds", landind_short, landind_short_len, "Selected landscape indices vector" },
+/*************************
+ *
+ *   Experimental code
+ * 
+	{ "lbp", local_binary_pattern, local_binary_pattern_len, "Histogram of local binary patterns" },
 	{ "jcov", jcov, jcov_len, "J-Coocurrence vector" },
+ *
+ ************************/
 	{ "ent", H, H_len, "Shannon entropy" },
 	{ NULL, NULL, NULL, 0 }
 };
