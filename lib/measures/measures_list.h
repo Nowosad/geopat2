@@ -52,13 +52,19 @@ measure_rec measures_list[] = {
 	{ "jsd",  jensen_shannon, "Jensen Shannon Divergence" },
 	{ "euc",  euclidean,      "Euclidean distance" },
 	{ "eucn", euclidean_norm, "Normalized euclidean distance" },
-	{ "eucp", euclidean_period, "Normalized euclidean distance (periodic)" },
 	{ "wh",   wave_hedges,    "Wave-Hedges distance" },
-//	{ "cos",  cosine,         "Cosine distance" },
+/*************************
+ *
+ *   Experimental code
+ * 
+	{ "eucp", euclidean_period, "Normalized euclidean distance (periodic)" },
+	{ "cos",  cosine,         "Cosine distance" },
 	{ "jac",  jaccard,        "Jaccard distance" },
-//	{ "roz",  rozicka,        "Rozicka distance" },
-//	{ "rozp", rozickap,       "Rozicka distance (extended)" },
-//	{ "hass", hassanat,       "Hassanat distance" },
+	{ "roz",  rozicka,        "Rozicka distance" },
+	{ "rozp", rozickap,       "Rozicka distance (extended)" },
+	{ "hass", hassanat,       "Hassanat distance" },
+ *
+ ************************/
 	{ "tsEUC",   tsEUC,       "time series - euclidean distance" },
 	{ "tsEUCP",  tsEUCP,      "periodic time series - euclidean distance" },
 	{ "tsDTW",   tsDTW,       "time series - Dynamic Time Warping distance" },
