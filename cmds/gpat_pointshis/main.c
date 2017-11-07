@@ -16,7 +16,6 @@
  *
  *****************************************************************************/
 
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -71,7 +70,6 @@ int main(int argc, char **argv) {
     struct arg_end  *end   = arg_end(20);
     void* argtable[] = {inp,out,sign,lvl,size,norm,list,x,y,desc,xy,app,help,end};
 
-
     int nerrors = arg_parse(argc,argv,argtable);
 
     description = "location";
@@ -118,14 +116,6 @@ int main(int argc, char **argv) {
       ninputs=inp->count;
     }
 
-    if(size->count > 0) {
-      size_val = size->ival[0];
-      if(size_val<=10) {
-        printf("\nSize can not be less then 10\n\n");
-        exit(0);
-      }
-    }
-
     if(sign->count>0 && strcmp(sign->sval[0],"fdec")==0) {
       if((size_val != 0) && ((size_val & (~size_val + 1)) != size_val)) {
         printf("\nFor the full decomposition, size has to be a power of two.\n\n");
@@ -140,7 +130,6 @@ int main(int argc, char **argv) {
         }
       }
     }
-
 
 
     if(norm->count > 0) {
@@ -189,9 +178,8 @@ int main(int argc, char **argv) {
       frame = ezgdal_add_frameset_frame(frameset,0,0,0,0);
       frames[i] = frame;
     }
-    
 
-    printf("Calculating statistics..."); fflush(stdout);
+    printf("Calculating statistics... "); fflush(stdout);
     for(i=0; i<ninputs; i++) {
       ezgdal_calc_layer_stats(input_layers[i]);
       double min = input_layers[i]->stats->min;
@@ -221,7 +209,7 @@ int main(int argc, char **argv) {
     else
       f = fopen(out->sval[0],"w");
 
-    printf("Calculating signature..."); fflush(stdout);
+    printf("Calculating signature... "); fflush(stdout);
 
     if(x->count>0 && y->count>0) {
       if(desc->count>0)
