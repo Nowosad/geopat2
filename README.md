@@ -36,3 +36,7 @@ List of the papers related to the GeoPAT software. The preprints can be found at
 - Netzel, P. and Stepinski, T.F., 2014, July. Pattern-based assessment of 2001/2006 land cover change over the entire United States. In Geoscience and Remote Sensing Symposium (IGARSS), 2014 IEEE International (pp. 4188-4191). IEEE.
 - Stepinski, T.F., Netzel, P. and Jasiewicz, J., 2014. LandEx—a GeoWeb tool for query and retrieval of spatial patterns in land cover datasets. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 7(1), pp.257-266.
 - Jasiewicz, J. and Stepinski, T.F., 2013. Example-based retrieval of alike land-cover scenes from NLCD2006 database. IEEE Geoscience and Remote Sensing Letters, 10(1), pp.155-159.
+
+# Acknowledgements
+
+This work was supported by the University of Cincinnati Space Exploration Institute and by the grant NNX15AJ47G from the National Aeronautics and Space Administration.
