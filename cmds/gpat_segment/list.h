@@ -5,9 +5,9 @@
  *
  * MODULE:	segmentation of motifels grid
  * AUTHOR(S):	Jaroslaw Jasiewicz, Jacek Niesterowicz, Tomasz Stepinski
- * PURPOSE:	information retrival using categorical maps:
+ * PURPOSE:	information retrieval using categorical maps:
  *		compares grid of histograms
- * COPYRIGHT:	(C) Space Informatics Lab, Univeristy of Cincinnati
+ * COPYRIGHT:	(C) Space Informatics Lab, University of Cincinnati
  *
  *		This program is free software under the GNU General Public
  *		License (>=v2). Read the file COPYING that comes with GRASS

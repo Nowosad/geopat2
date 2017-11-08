@@ -159,7 +159,7 @@ int* create_segment_map(HEXGRID* hx, LOCAL_PARAMS* p, EZGDAL_LAYER* l)
 			while(hx->histogram_ids[i][j]>-1) {
 				fragment=input_data[hx->histogram_ids[i][j]];
 				if(!Rast_is_c_null_value(&segment) && !Rast_is_c_null_value(&fragment) && segment!=fragment)
-					G_fatal_error(_("Segmentation map has no brick topology: %d %d"),segment,input_data[hx->histogram_ids[i][j]]);
+					G_fatal_error(_("Segmentation map is not of a brick topology: %d %d"),segment,input_data[hx->histogram_ids[i][j]]);
 				j++;
 			}
 			segments[i]=segment;

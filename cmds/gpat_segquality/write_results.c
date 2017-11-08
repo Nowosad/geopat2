@@ -102,7 +102,7 @@ void write_raster_dbl(SML_DATA_HEADER* dh, void *map, char *raster_fname, int si
                           &nodata);
 
 
-    fprintf(stdout, "Writing output ... ");
+    fprintf(stdout, "Writing output...");
     ezgdal_show_progress(stdout,0,nrows);
     for(r=0; r<nrows; r++) {
         for(c=0; c<ncols; c++)

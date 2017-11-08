@@ -87,7 +87,7 @@ void convert_to_vector(char *raster_fname, char *vector_fname) {
     l = ezgdal_open_layer(raster_fname);
 
     if(l==NULL) {
-        ezgdal_show_message(stdout, "No rarter map to vectorize");
+        ezgdal_show_message(stdout, "No raster map to vectorize");
         return;
     }
 

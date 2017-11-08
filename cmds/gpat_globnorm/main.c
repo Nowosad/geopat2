@@ -282,7 +282,7 @@ int main(int argc, char **argv) {
     NORM_STATS *norm_stats;
 
     char *norm_method = "01";
-    char list_methods[] = "\nList of global normalization methods:\n\n01\tnormalize coordinats to [0,1]\nN01\tnormalize coordinats to N(0,1)\nind01\tnormalize coordinats to [0,1] for 72 lanscape indices\n";
+    char list_methods[] = "\nList of global normalization methods:\n\n01\tnormalize coordinates to [0,1]\nN01\tnormalize coordinates to N(0,1)\nind01\tnormalize coordinates to [0,1] for 72 landscape indices\n";
 
     struct arg_str  *inp   = arg_str1("i","input","<file_name>","name of input file (GRID)");
     struct arg_str  *out   = arg_str1("o","output","<file_name>","name of output file (GRID)");
@@ -316,7 +316,7 @@ int main(int argc, char **argv) {
       if(strcmp((char *)(norm->sval[0]),"01")!=0 && 
          strcmp((char *)(norm->sval[0]),"N01")!=0 &&
          strcmp((char *)(norm->sval[0]),"ind01")!=0  ) {
-        printf("\nWrong nomalization method: %s\n\n",norm->sval[0]);
+        printf("\nWrong normalization method: %s\n\n",norm->sval[0]);
         printf(list_methods);
         exit(0);
       } else 

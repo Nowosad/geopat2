@@ -13,7 +13,6 @@
  *
  *****************************************************************************/
 
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -26,7 +25,6 @@
 #include "../../lib/argtable/argtable3.h"
 #include "../../lib/tools/libtools.h"
 
-
 void usage(char *progname, void *argtable) {
       printf("\nUsage:\n\t%s", progname);
       arg_print_syntax(stdout,argtable,"\n");
@@ -35,8 +33,6 @@ void usage(char *progname, void *argtable) {
       printf("\n");
       exit(0);
 }
-
-
 
 int main(int argc, char **argv) {
 
@@ -58,7 +54,6 @@ int main(int argc, char **argv) {
     struct arg_end  *end  = arg_end(20);
     void* argtable[] = {inp,out,x,y,desc,xy,app,help,end};
 
-
     int nerrors = arg_parse(argc,argv,argtable);
 
     description = "location";
@@ -74,7 +69,7 @@ int main(int argc, char **argv) {
     }
 
     if(!((x->count>0 && y->count>0) || (xy->count>0))) {
-      printf("\n%s\n\n", "User has to provide either x and y parameter or xy_file parameter.");
+      printf("\n%s\n\n", "User has to provide either x and y parameter or the xy_file parameter.");
       usage(argv[0],argtable);
     }
 
@@ -115,7 +110,6 @@ int main(int argc, char **argv) {
 
     free(xybuf);
     sml_close_layer(dh_f);
-
 
 printf("OK\n");
 

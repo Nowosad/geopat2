@@ -126,7 +126,7 @@ int main(int argc, char **argv) {
     char *list_dist;
     distance_func *func = get_distance("jsd");
 
-    struct arg_str  *inp   = arg_str1("i","input","<file_name>","name of input file witch signatures (TXT)");
+    struct arg_str  *inp   = arg_str1("i","input","<file_name>","name of input file with signatures (TXT)");
     struct arg_str  *out   = arg_str1("o","output","<file_name>","name of output file (CSV) with similarity matrix");
     struct arg_str  *mes   = arg_str0("m","measure","<measure_name>","similarity measure (use -l to list all measures; default 'jsd')");
     struct arg_lit  *mesl  = arg_lit0("l","list_measures","list all measures");

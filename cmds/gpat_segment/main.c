@@ -58,8 +58,8 @@ int main(int argc, char *argv[])
     struct arg_str  *inp   = arg_str1("i","input","<file_name>","name of input files (GRID)");
     struct arg_str  *out   = arg_str1("o","output","<file_name>","name of output file with segments (TIFF)");
     struct arg_str  *shp   = arg_str0("v","vector","<file_name>","name of output vector file with segments (SHP)");
-    struct arg_int  *size  = arg_int0(NULL,"size","<n>","output resolution modyfier (default: 1)");
-    struct arg_str  *mes   = arg_str0("m","measure","<measure_name>","similarity measure (use -l to list all measures; defult: jsd)");
+    struct arg_int  *size  = arg_int0(NULL,"size","<n>","output resolution modifier (default: 1)");
+    struct arg_str  *mes   = arg_str0("m","measure","<measure_name>","similarity measure (use -l to list all measures; default: jsd)");
     struct arg_lit  *mesl  = arg_lit0("l","list_measures","list all measures");
     struct arg_dbl  *lower_threshold  = arg_dbl0(NULL,"lthreshold","<double>","minimum distance threshold to build areas (default: 0.1)");
     struct arg_dbl  *upper_threshold  = arg_dbl0(NULL,"uthreshold","<double>","maximum distance threshold to build areas (default: 0.3");
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
     struct arg_lit  *flag_complete          = arg_lit0("c","complete","use complete linkage (default is average)");
 //    struct arg_lit  *flag_threshold         = arg_lit0("d","th_map","calculate threshold layer and exit (all params are ignored)");
     struct arg_lit  *flag_skip_growing      = arg_lit0("g","no_growing","skip growing phase");
-    struct arg_lit  *flag_skip_hierarhical  = arg_lit0("a","no_hierarhical","skip herarhical phase");
+    struct arg_lit  *flag_skip_hierarchical  = arg_lit0("a","no_hierarchical","skip hierarchical phase");
     struct arg_lit  *flag_quad              = arg_lit0("q","quad","quad mode (rook topology)");
     struct arg_int  *th    = arg_int0("t",NULL,"<n>","number of threads (default: 1)");
     struct arg_lit  *help  = arg_lit0("h","help","print help and exit");
@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
                         lower_threshold,upper_threshold,
                         swap,minarea,maxhist,
                         flag_complete,/*flag_threshold,*/flag_skip_growing,
-                        flag_skip_hierarhical,flag_quad,
+                        flag_skip_hierarchical,flag_quad,
                         th,help,end};
 
     int nerrors = arg_parse(argc,argv,argtable);
@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
       exit(0);
     }
 
-    if(flag_skip_growing->count>0 && flag_skip_hierarhical->count>0) {
+    if(flag_skip_growing->count>0 && flag_skip_hierarchical->count>0) {
       printf("\nOnly one flag of -a or -g can be used\n\n");
       exit(0);
     }
@@ -168,7 +168,7 @@ int main(int argc, char *argv[])
     else
       parameters->minarea=0;
     if(parameters->minarea<0) {
-      printf("\narea must be non-negative\n\n");
+      printf("\nArea must be non-negative\n\n");
       exit(0);
     }
 
@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
       /* measure not found */
       if(parameters->calculate==NULL) {
         printf("\nWrong distance measure: %s\n\n",mes->sval[0]);
-        printf("list of distances:\n");
+        printf("List of distances:\n");
         list_dist = list_all_distances();
         printf("\n%s\n",list_dist);
         free(list_dist);
@@ -261,8 +261,8 @@ for(j=0; j<10; j++)
     if(flag_skip_growing->count==0)
         hex_region_growing(hexgrid,parameters,areas,results,seeds,num_of_seeds);
 
-    if(flag_skip_hierarhical->count==0)
-        hex_hierarhical(hexgrid,parameters,areas,results);
+    if(flag_skip_hierarchical->count==0)
+        hex_hierarchical(hexgrid,parameters,areas,results);
 
     if(parameters->minarea>0)
         hex_minarea(hexgrid,parameters,areas,results);

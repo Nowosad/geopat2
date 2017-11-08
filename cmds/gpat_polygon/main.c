@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
       /* signature not found */
       if(sign_func==NULL || sign_len_func==NULL) {
         printf("\nWrong signature name: %s\n\n",sig->sval[0]);
-        printf("list of avalable signatures:\n");
+        printf("List of available signatures:\n");
         char *list = list_all_signatures();
         printf("\n%s\n",list);
         free(list);
@@ -111,7 +111,7 @@ int main(int argc, char **argv) {
       /* signature not found */
       if(norm_func==NULL) {
         printf("\nWrong signature name: %s\n\n",norm->sval[0]);
-        printf("list of avalable local normalization methods:\n");
+        printf("List of available local normalization methods:\n");
         char *list = list_all_normalization_methods();
         printf("\n%s\n",list);
         free(list);
@@ -147,14 +147,14 @@ int main(int argc, char **argv) {
 
     input_layers[0] = ezgdal_open_layer((char *)(seg->sval[0]));
     if(input_layers[0]==NULL) {
-      printf("\nCan not open file: '%s'\n\n", seg->sval[0]);
+      printf("\nCannot open file: '%s'\n\n", seg->sval[0]);
       usage(argv[0],argtable);
     }
 
     for(i=1; i<ninputs; i++) {
       input_layers[i] = ezgdal_open_layer((char *)(inp->sval[i-1]));
       if(input_layers[i]==NULL) {
-        printf("\nCan not open file: '%s'\n\n", inp->sval[i-1]);
+        printf("\nCannot open file: '%s'\n\n", inp->sval[i-1]);
         usage(argv[0],argtable);
       }
     }
@@ -166,11 +166,11 @@ int main(int argc, char **argv) {
     }
 
     if(!ezgdal_is_bbox_ok(input_layers,ninputs)) {
-      printf("\nInput files have various extent and/or resolution!\n\n");
+      printf("\nInput files have various extents and/or resolutions!\n\n");
       usage(argv[0],argtable);
     }
 
-    printf("Calculating statistics ... "); fflush(stdout);
+    printf("Calculating statistics..."); fflush(stdout);
     for(i=0; i<ninputs; i++) {
       ezgdal_calc_layer_stats(input_layers[i]);
       double min = input_layers[i]->stats->min;
@@ -186,7 +186,7 @@ int main(int argc, char **argv) {
     int *dims = (int *)malloc(sizeof(int));
     dims[0] = sign_len_func(input_layers+1, ninputs-1);
     if(dims[0]<0) {
-      printf("\nSignature lenght can not be determined!\n\n");
+      printf("\nSignature length cannot be determined!\n\n");
       usage(argv[0],argtable);
     }
     printf("Signature length: %d\n",dims[0]); fflush(stdout);
@@ -196,7 +196,7 @@ int main(int argc, char **argv) {
 
 //////////////////////////////////////////////////////////////////////////////
 
-    printf("Calculating extents of polygons ...     "); fflush(stdout);
+    printf("Calculating extents of polygons..."); fflush(stdout);
 
     EZGDAL_LAYER *lCats = input_layers[0];
     int nCats = lCats->stats->map_max_val+1;
@@ -236,17 +236,20 @@ int main(int argc, char **argv) {
 
 //////////////////////////////////////////////////////////////////////////////
 
-    printf("Calculating signatures of polygons ...     "); fflush(stdout);
+    printf("Calculating signatures of polygons..."); fflush(stdout);
 
     for(i=1; i<ninputs; i++) {
       EZGDAL_FRAMESET *fs = ezgdal_create_frameset_with_size(input_layers[i],nCats);
       for(j=0; j<nCats; j++)
-        ezgdal_add_frameset_frame(fs,
-                                frmsetCats->frame[j]->col1,
-                                frmsetCats->frame[j]->col2,
-                                frmsetCats->frame[j]->row1,
-                                frmsetCats->frame[j]->row2
-                               );
+        if(ezgdal_add_frameset_frame(fs,
+                                     frmsetCats->frame[j]->col1,
+                                     frmsetCats->frame[j]->col2,
+                                     frmsetCats->frame[j]->row1,
+                                     frmsetCats->frame[j]->row2
+                                    )==NULL) {
+            ezgdal_show_message(stderr,"No RAM to proceed!");
+            exit(EXIT_FAILURE);
+          }
       if(!input_layers[i]->is_no_data) {
         input_layers[i]->is_no_data = TRUE;
         input_layers[i]->no_data = DBL_MIN;
