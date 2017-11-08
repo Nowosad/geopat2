@@ -10,11 +10,11 @@ before_install:
    - mkdir sml ezgdal
    - wget http://pawel.netzel.pl/gitlist/index.php/SML/tarball/master -O sml.tar
    - tar xvC sml -f sml.tar
-   - make -C sml/ PREFIX=/usr/local
+   - make -C sml/
    - sudo make install -C sml/ 
    - wget http://pawel.netzel.pl/gitlist/index.php/ezGDAL/tarball/master -O ezGDAL.tar
    - tar xvC ezgdal -f ezGDAL.tar
-   - make -C ezgdal/ PREFIX=/usr/local
+   - make -C ezgdal/
    - sudo make install -C ezgdal/ 
    - sudo ldconfig
    
