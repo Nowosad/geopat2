@@ -3,7 +3,6 @@ language: c
 sudo: required
 
 before_install:
-   - export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
    - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
    - sudo apt-get --yes --force-yes update -qq
    - sudo apt-get install --yes libgdal-dev
@@ -19,5 +18,6 @@ before_install:
    - sudo ldconfig
    
 script:
+  - export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
   - make
   - sudo make install
