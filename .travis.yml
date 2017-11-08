@@ -17,4 +17,5 @@ before_install:
    - sudo make install -C ezgdal/
    
 script:
-  - make install
+  - make
+  - sudo make install
