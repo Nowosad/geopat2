@@ -1,5 +1,5 @@
 language: c
-
+dist: trusty
 sudo: required
 
 before_install:
@@ -15,5 +15,3 @@ before_install:
    - tar xvC ezgdal -f ezGDAL.tar
    - make -C ezgdal/
    - sudo make install -C ezgdal/
-   
-install: make 
