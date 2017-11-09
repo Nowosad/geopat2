@@ -15,9 +15,7 @@ before_install:
    - tar xvC ezgdal -f ezGDAL.tar
    - make -C ezgdal/
    - sudo make install -C ezgdal/ 
-   - sudo ldconfig
-   
+
 script:
-  - export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
   - make
   - sudo make install
