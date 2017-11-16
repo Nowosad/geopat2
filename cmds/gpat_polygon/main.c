@@ -56,7 +56,7 @@ int main(int argc, char **argv) {
     struct arg_str  *out   = arg_str1("o","output","<file_name>","name of output file (TXT)");
     struct arg_str  *sig   = arg_str0("s","signature","<signature_name>","signature method (use -l to list all methods, default: 'cooc')");
     struct arg_str  *norm  = arg_str0("n","normalization","<normalization_name>","signature normalization method (use -l to list all methods, default: 'pdf')");
-    struct arg_int  *max   = arg_int0("m","max_buffer_size","<size in MB>","max size of internal buffer for polygon's extent, default: '4096')");
+    struct arg_int  *max   = arg_int0("m","max_buffer_size","<size in MB>","max size of the internal buffer for a polygon's extent, default: '4096')");
     struct arg_lit  *list  = arg_lit0("l",NULL,"list all signatures and normalization methods");
     struct arg_int  *th    = arg_int0("t",NULL,"<n>","number of threads (default: 1)");
     struct arg_lit  *help  = arg_lit0("h","help","print this help and exit");
