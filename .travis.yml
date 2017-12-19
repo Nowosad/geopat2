@@ -3,7 +3,7 @@ language: c
 sudo: required
 
 before_install:
-   - export LD_LIBRARY_PATH=/usr/local/lib
+   - echo /usr/local/lib > /etc/ld.so.conf.d/local.conf
 
 install:
    - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
