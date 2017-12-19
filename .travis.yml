@@ -8,10 +8,10 @@ before_install:
    - sudo apt-get install --yes libgdal-dev
    - mkdir sml ezgdal
    - wget http://pawel.netzel.pl/gitlist/index.php/SML/tarball/master -O sml.tar
-   - tar xvC sml -f sml.tar
+   - tar -xvf sml.tar -C sml
    - cd sml && make && sudo make install
-   - wget http://pawel.netzel.pl/gitlist/index.php/ezGDAL/tarball/master -O ezGDAL.tar
-   - tar xvC ezgdal -f ezGDAL.tar
+   - wget http://pawel.netzel.pl/gitlist/index.php/ezGDAL/tarball/master -O ezgdal.tar
+   - tar -xvf ezgdal.tar -C ezgdal
    - cd ezgdal && make && sudo make install
    - sudo ldconfig
 
