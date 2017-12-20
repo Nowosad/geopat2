@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -I/usr/include/gdal -fopenmp -O2 -DSML_LINUX -I/usr/local/include -DEZGDAL_LINUX
+CFLAGS = -Wall -I/usr/include/gdal -fopenmp -O2 -I/usr/local/include -DSML_LINUX -DEZGDAL_LINUX
 LIBCFLAGS = 
 EXTFLAGS = -lm -lgomp -lgdal -L/usr/local/lib -lsml -lezgdal 
 AR = ar cvq
