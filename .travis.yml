@@ -7,8 +7,6 @@ install:
    - sudo apt-get --yes --force-yes update -qq
    - sudo apt-get install --yes libgdal-dev
    - sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/local.conf'
-   - sudo sh -c 'echo "/usr/include/gdal" >> /etc/ld.so.conf.d/local.conf'
-   - mkdir sml ezgdal
    - wget http://sil.uc.edu/cms/data/uploads/software_data/GPAT2/ezGDAL.tar.gz
    - tar zxvf ezGDAL.tar.gz
    - pushd ezGDAL && make && sudo make install && popd
