@@ -56,11 +56,12 @@ int main(int argc, char **argv) {
     struct arg_str  *out   = arg_str1("o","output","<file_name>","name of output file (TXT)");
     struct arg_str  *sig   = arg_str0("s","signature","<signature_name>","signature method (use -l to list all methods, default: 'cooc')");
     struct arg_str  *norm  = arg_str0("n","normalization","<normalization_name>","signature normalization method (use -l to list all methods, default: 'pdf')");
+    struct arg_int  *max   = arg_int0("m","max_buffer_size","<size in MB>","max size of the internal buffer for a polygon's extent, default: '4096')");
     struct arg_lit  *list  = arg_lit0("l",NULL,"list all signatures and normalization methods");
     struct arg_int  *th    = arg_int0("t",NULL,"<n>","number of threads (default: 1)");
     struct arg_lit  *help  = arg_lit0("h","help","print this help and exit");
     struct arg_end  *end   = arg_end(20);
-    void* argtable[] = {inp,seg,out,sig,norm,list,th,help,end};
+    void* argtable[] = {inp,seg,out,sig,norm,list,max,th,help,end};
 
     int nerrors = arg_parse(argc,argv,argtable);
 
@@ -119,6 +120,11 @@ int main(int argc, char **argv) {
       }
     }
 
+    if(max->count > 0) {
+      if(max->ival[0]>0)
+        ezgdal_frameset_max_buffer_size((unsigned long)(max->ival[0])*1048575);
+    }
+
     /* set number of threads */
     if (th->count > 0) 
       omp_set_num_threads(th->ival[0]);
@@ -170,7 +176,7 @@ int main(int argc, char **argv) {
       usage(argv[0],argtable);
     }
 
-    printf("Calculating statistics..."); fflush(stdout);
+    printf("Calculating statistics... "); fflush(stdout);
     for(i=0; i<ninputs; i++) {
       ezgdal_calc_layer_stats(input_layers[i]);
       double min = input_layers[i]->stats->min;
@@ -196,13 +202,17 @@ int main(int argc, char **argv) {
 
 //////////////////////////////////////////////////////////////////////////////
 
-    printf("Calculating extents of polygons..."); fflush(stdout);
+    printf("Calculating extents of polygons...     "); fflush(stdout);
 
     EZGDAL_LAYER *lCats = input_layers[0];
     int nCats = lCats->stats->map_max_val+1;
     EZGDAL_FRAMESET *frmsetCats = ezgdal_create_frameset_with_size(lCats,nCats);
     for(i=0; i<nCats; i++) {
       EZGDAL_FRAME *frm = ezgdal_add_frameset_frame(frmsetCats,lCats->cols,0,lCats->rows,0);
+      if(frm==NULL) {
+            ezgdal_show_message(stderr,"Not enough RAM to proceed!");
+            exit(EXIT_FAILURE);
+          }
       frm->col1 = lCats->cols;
       frm->col2 = 0;
       frm->row1 = lCats->rows;
@@ -236,7 +246,7 @@ int main(int argc, char **argv) {
 
 //////////////////////////////////////////////////////////////////////////////
 
-    printf("Calculating signatures of polygons..."); fflush(stdout);
+    printf("Calculating signatures of polygons...     "); fflush(stdout);
 
     for(i=1; i<ninputs; i++) {
       EZGDAL_FRAMESET *fs = ezgdal_create_frameset_with_size(input_layers[i],nCats);
@@ -247,7 +257,7 @@ int main(int argc, char **argv) {
                                      frmsetCats->frame[j]->row1,
                                      frmsetCats->frame[j]->row2
                                     )==NULL) {
-            ezgdal_show_message(stderr,"No RAM to proceed!");
+            ezgdal_show_message(stderr,"Not enough RAM to proceed!");
             exit(EXIT_FAILURE);
           }
       if(!input_layers[i]->is_no_data) {
@@ -255,22 +265,21 @@ int main(int argc, char **argv) {
         input_layers[i]->no_data = DBL_MIN;
       }
     }
-    
 
 
     double *result = (double *)malloc(dims[0]*sizeof(double));
     EZGDAL_FRAME **frames = (EZGDAL_FRAME **)malloc((ninputs-1)*sizeof(EZGDAL_FRAME *));
-    
+
     for(i=0; i<nCats; i++) {
       ezgdal_show_progress(stdout, i, nCats);
-      
+
       EZGDAL_FRAME *frmCats = frmsetCats->frame[i];
       ezgdal_load_frameset_frame_data(frmCats);
 
       double cat = ezgdal_get_index_value(input_layers[0],i);
 
       for(j=1; j<ninputs; j++) {
-      
+
         EZGDAL_FRAME *frmInp = input_layers[j]->frameset->frame[i];
         frames[j-1] = frmInp;
 
