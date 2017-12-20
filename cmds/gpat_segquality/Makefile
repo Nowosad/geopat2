@@ -28,7 +28,7 @@ all: $(PROG)
 	$(CC) $(CFLAGS) $(EXTFLAGS) -c $<
 
 $(PROG): $(OFILES)
-	$(CC) $(CFLAGS) $(EXTFLAGS) -o $(PROG) $(OFILES) $(LIBS)
+	$(CC) -o $(PROG) $(OFILES) $(LIBS) $(CFLAGS) $(EXTFLAGS)
 
 install: $(PROG)
 	mv -f $(PROG) $(PREFIX)/bin

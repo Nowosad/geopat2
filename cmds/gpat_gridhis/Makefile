@@ -14,7 +14,7 @@ endif
 all: $(PROG)
 
 $(PROG): main.o
-	$(CC) $(CFLAGS) $(EXTFLAGS) -o $(PROG) main.o $(LIBS)
+	$(CC) -o $(PROG) main.o $(LIBS) $(CFLAGS) $(EXTFLAGS)
 
 main.o: main.c
 	$(CC) $(CFLAGS) $(EXTFLAGS) -c main.c
