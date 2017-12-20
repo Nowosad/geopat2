@@ -3,7 +3,8 @@ language: c
 sudo: required
 
 install:
-  - `gcc -print-prog-name=cc1` -v
+  - touch a.c
+  - gcc -v -E a.c
 
 script:
   - make
