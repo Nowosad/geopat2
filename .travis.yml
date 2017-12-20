@@ -10,11 +10,11 @@ install:
    - mkdir sml ezgdal
    - wget http://pawel.netzel.pl/gitlist/index.php/ezGDAL/tarball/master -O ezgdal.tar
    - tar -xvf ezgdal.tar -C ezgdal
-   - pushd ezgdal && make PREFIX=/usr && sudo make install && popd
+   - pushd ezgdal && make && sudo make install && popd
    - sudo ldconfig
    - wget http://pawel.netzel.pl/gitlist/index.php/SML/tarball/master -O sml.tar
    - tar -xvf sml.tar -C sml
-   - pushd sml && make PREFIX=/usr && sudo make install && popd
+   - pushd sml && make && sudo make install && popd
    - sudo ldconfig
 
 script:
