@@ -11,7 +11,6 @@ install:
    - wget http://pawel.netzel.pl/gitlist/index.php/SML/tarball/master -O sml.tar
    - tar -xvf sml.tar -C sml
    - pushd sml && make && sudo make install && popd
-   - sudo ldconfig
    - wget http://pawel.netzel.pl/gitlist/index.php/ezGDAL/tarball/master -O ezgdal.tar
    - tar -xvf ezgdal.tar -C ezgdal
    - pushd ezgdal && make && sudo make install && popd
