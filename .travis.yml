@@ -3,7 +3,7 @@ language: c
 sudo: required
 
 install:
-   - `gcc -print-prog-name=cc1` -v
+  - `gcc -print-prog-name=cc1` -v
 
 script:
   - make
