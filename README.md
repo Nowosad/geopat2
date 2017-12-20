@@ -1,5 +1,7 @@
 # GeoPAT 2.0
 
+[![Build Status](https://travis-ci.org/Nowosad/geopat2.svg?branch=master)](https://travis-ci.org/Nowosad/geopat2)
+
 ## Overview
 
 GeoPAT 2.0 (Geospatial Pattern Analysis Toolbox) is a standalone suite of modules written in C and dedicated to analysis of large Earth Science datasets in their entirety using spatial and/or temporal patterns. 
