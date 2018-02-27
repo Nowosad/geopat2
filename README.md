@@ -17,14 +17,14 @@ This enables spatial analysis such as search, change detection, segmentation, an
 
 The GeoPAT 2.0 software and manual are available at http://sil.uc.edu/cms/index.php?id=geopat2.
 
-## How to cite GeoPAT 2.0
-
-**Netzel P., Nowosad J., Jasiewicz J., Niesterowicz J, Stepinski T.**, 2018. *GeoPAT 2.0: user's manual*. Zenodo. http://doi.org/10.5281/zenodo.1185408
-
 ## Installation
 
 Installation instruction can be found in the [GeoPAT 2.0 manual](https://rawgit.com/Nowosad/geopat2_manual/master/output/GeoPAT2_Manual.pdf). 
 Additionally, the [.travis](https://github.com/Nowosad/geopat2/blob/master/.travis.yml) file contains code used for  GeoPAT 2.0 installation.
+
+## How to cite GeoPAT 2.0
+
+**Netzel P., Nowosad J., Jasiewicz J., Niesterowicz J, Stepinski T.**, 2018. *GeoPAT 2.0: user's manual*. Zenodo. http://doi.org/10.5281/zenodo.1185408
 
 ## GeoPAT related papers
 
