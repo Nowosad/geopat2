@@ -15,14 +15,22 @@ This enables spatial analysis such as search, change detection, segmentation, an
 
 ![](https://github.com/Nowosad/geopat2_manual/raw/master/figs/logo.png)
 
-The GeoPAT 2.0 software is available at http://sil.uc.edu/cms/index.php?id=geopat2.
+The GeoPAT 2.0 software and manual are available at http://sil.uc.edu/cms/index.php?id=geopat2.
 
-The GeoPAT 2.0 manual is at https://rawgit.com/Nowosad/geopat2_manual/master/output/GeoPAT2_Manual.pdf.
+## How to cite GeoPAT 2.0
+
+**Netzel P., Nowosad J., Jasiewicz J., Niesterowicz J, Stepinski T.**, 2018. *GeoPAT 2.0: user's manual*. Zenodo. http://doi.org/10.5281/zenodo.1185408
+
+## Installation
+
+Installation instruction can be found in the [GeoPAT 2.0 manual](https://rawgit.com/Nowosad/geopat2_manual/master/output/GeoPAT2_Manual.pdf). 
+Additionally, the [.travis](https://github.com/Nowosad/geopat2/blob/master/.travis.yml) file contains code used for  GeoPAT 2.0 installation.
 
 ## GeoPAT related papers
 
 List of the papers related to the GeoPAT software. The preprints can be found at http://sil.uc.edu/cms/index.php?id=journal-papers.
 
+- Nowosad J., Stepinski  T. F., 2018. Global inventory of landscape patterns and latent variables of landscape spatial configuration, Ecological Indicators 89, pp. 159-167.
 - Niesterowicz, J. and Stepinski, T.F., 2017. Pattern-based, multi-scale segmentation and regionalization of EOSD land cover. International Journal of Applied Earth Observation and Geoinformation, 62, pp.192-200.
 - Niesterowicz, J., Stepinski, T.F. and Jasiewicz, J., 2016. Unsupervised regionalization of the United States into landscape pattern types. International Journal of Geographical Information Science, 30(7), pp.1450-1468.
 - Netzel, P. and Stepinski, T.F., 2017. World Climate Search and Classification Using a Dynamic Time Warping Similarity Function. In Advances in Geocomputation (pp. 181-195). Springer
