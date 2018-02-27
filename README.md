@@ -47,6 +47,6 @@ List of the papers related to the GeoPAT software. The preprints can be found at
 - Stepinski, T.F., Netzel, P. and Jasiewicz, J., 2014. LandEx—a GeoWeb tool for query and retrieval of spatial patterns in land cover datasets. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 7(1), pp.257-266.
 - Jasiewicz, J. and Stepinski, T.F., 2013. Example-based retrieval of alike land-cover scenes from NLCD2006 database. IEEE Geoscience and Remote Sensing Letters, 10(1), pp.155-159.
 
-## Acknowledgements
+## Acknowledgments
 
 This work was supported by the University of Cincinnati Space Exploration Institute and by the grant NNX15AJ47G from the National Aeronautics and Space Administration.
