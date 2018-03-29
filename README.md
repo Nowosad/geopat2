@@ -30,6 +30,7 @@ Additionally, the [.travis](https://github.com/Nowosad/geopat2/blob/master/.trav
 
 List of the papers related to the GeoPAT software. The preprints can be found at http://sil.uc.edu/cms/index.php?id=journal-papers.
 
+- Nowosad, J. and Stepinski, T. F., 2018. Towards machine ecoregionalization of Earth's landmass using pattern segmentation method. International Journal of Applied Earth Observation and Geoinformation, 69, pp.110-118.
 - Nowosad J., Stepinski  T. F., 2018. Global inventory of landscape patterns and latent variables of landscape spatial configuration, Ecological Indicators 89, pp. 159-167.
 - Niesterowicz, J. and Stepinski, T.F., 2017. Pattern-based, multi-scale segmentation and regionalization of EOSD land cover. International Journal of Applied Earth Observation and Geoinformation, 62, pp.192-200.
 - Niesterowicz, J., Stepinski, T.F. and Jasiewicz, J., 2016. Unsupervised regionalization of the United States into landscape pattern types. International Journal of Geographical Information Science, 30(7), pp.1450-1468.
