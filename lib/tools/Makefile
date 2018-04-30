@@ -18,7 +18,7 @@ $(COMMON_O): $(COMMON) $(HEADERS)
 	$(CC) $(CFLAGS) $(LIBCFLAGS) -c  $(COMMON)
 
 install: $(PROG).a
-	mv -f $(PROG).* ../../../lib
+	#mv -f $(PROG).* ../../../lib
 	cp -f *.h ../../../include
 
 clean:
