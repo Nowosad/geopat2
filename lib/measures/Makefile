@@ -26,7 +26,7 @@ emd.c: emd.c
 	$(CC) $(CFLAGS) $(LIBCFLAGS) -c emd.c
 
 install: $(PROG).a
-	#mv -f $(PROG).* ../../../lib
+	mv -f $(PROG).* ../../../lib
 	cp -f measures.h ../../../include
 
 clean:
