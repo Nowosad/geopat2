@@ -22,8 +22,8 @@
 #include <math.h>
 #include <omp.h>
 
-#include <ezgdal.h>
-#include <sml.h>
+#include "../../lib/ezGDAL/ezgdal.h"
+#include "../../lib/SML/sml.h"
 
 #include "../../lib/argtable/argtable3.h"
 #include "../../lib/signatures/signatures.h"

@@ -21,12 +21,13 @@
 #include <math.h>
 #include <omp.h>
 
-#include <sml.h>
-#include <ezgdal.h>
-
+#include "../../lib/ezGDAL/ezgdal.h"
+#include "../../lib/SML/sml.h"
 
 #include "../../lib/argtable/argtable3.h"
 #include "../../lib/tools/libtools.h"
+
+
 
 void usage(char *progname, void *argtable) {
       printf("\nUsage:\n\t%s", progname);

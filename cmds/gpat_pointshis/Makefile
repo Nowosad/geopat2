@@ -2,6 +2,8 @@
 PROG = gpat_pointshis
 
 LIBS = \
+../../lib/SML/libsml.a \
+../../lib/ezGDAL/libezgdal.a \
 ../../lib/signatures/libsignatures.a \
 ../../lib/normalization/libnormalization.a \
 ../../lib/argtable/libargtable3.a \

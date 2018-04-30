@@ -22,4 +22,4 @@ install: $(PROG).a
 	cp -f *.h ../../../include
 
 clean:
-	rm -f *.o libtools.h libtools.a
+	rm -f *.o $(PROG).h $(PROG).a

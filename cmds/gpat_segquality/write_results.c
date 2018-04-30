@@ -14,8 +14,8 @@
  *		https://www.gnu.org/licenses/gpl-3.0.en.html
  *
  *****************************************************************************/
-#include <ezgdal.h>
-#include <sml.h>
+#include "../../lib/ezGDAL/ezgdal.h"
+#include "../../lib/SML/sml.h"
 #include <gdal.h>
 #include <gdal_alg.h>
 #include <ogr_srs_api.h>

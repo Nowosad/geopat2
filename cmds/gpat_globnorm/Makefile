@@ -2,6 +2,8 @@
 PROG = gpat_globnorm
 
 LIBS = \
+../../lib/SML/libsml.a \
+../../lib/ezGDAL/libezgdal.a \
 ../../lib/tools/libtools.a \
 ../../lib/argtable/libargtable3.a
 

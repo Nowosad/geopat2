@@ -18,7 +18,7 @@
 #include <omp.h>
 #include "local_proto.h"
 
-#include <ezgdal.h>
+#include "../../lib/ezGDAL/ezgdal.h"
 
 #include "../../lib/argtable/argtable3.h"
 #include "../../lib/measures/measures.h"

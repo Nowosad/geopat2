@@ -16,8 +16,8 @@
 #include <time.h>
 #include <math.h>
 
-#include <sml.h>
-#include <ezgdal.h>
+#include "../../lib/ezGDAL/ezgdal.h"
+#include "../../lib/SML/sml.h"
 
 #include "compatibility.h"
 
