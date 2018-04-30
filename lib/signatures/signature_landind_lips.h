@@ -20,7 +20,7 @@
 #include <string.h>
 #include <math.h>
 #include <ctype.h>
-#include <ezgdal.h>
+#include "../../lib/ezGDAL/ezgdal.h"
 
 /* list of categories in the input map */
 typedef struct {
