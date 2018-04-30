@@ -1,8 +1,7 @@
 #include <math.h>
-#include <ezgdal.h>
+#include "../../lib/ezGDAL/ezgdal.h"
 #include <assert.h>
 #include <stdarg.h>
-
 
 int lbp_recode[256] = {0,1,1,2,1,3,2,4,1,5,
                        3,6,2,7,4,8,1,9,5,10,

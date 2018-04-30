@@ -2,7 +2,7 @@
 #define _TOOLS_CALL_TXT_H_
 
 #include <stdio.h>
-#include <sml.h>
+#include "../../lib/SML/sml.h"
 
 /*
 void write_cell_txt(FILE *f, double x, double y, char *desc, void *cell, SML_DATA_HEADER *dh);
