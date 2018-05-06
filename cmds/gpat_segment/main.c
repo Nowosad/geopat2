@@ -1,7 +1,7 @@
 /****************************************************************************
  *
  * PROGRAM:	gpat_segment - part of GeoPAT 2
- * AUTHOR(S):	Pawel Netzel
+ * AUTHOR(S):	Pawel Netzel, Jakub Nowosad
  * PURPOSE:	program for a grid of motifels segmentation;
  *		segmentation code by Jaroslaw Jasiewicz, Jacek Niesterowicz, 
  *		Tomasz Stepinski from GRASS GeoPAT 

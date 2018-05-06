@@ -1,7 +1,7 @@
 /****************************************************************************
  *
  * MODULE:	Compatibility with GRASS GeoPAT
- * AUTHOR(S):	Pawel Netzel
+ * AUTHOR(S):	Pawel Netzel, Jakub Nowosad
  * COPYRIGHT:	(C) Space Informatics Lab, University of Cincinnati
  *
  *		This program is free software under the GNU General Public
