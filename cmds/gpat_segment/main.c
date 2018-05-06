@@ -24,7 +24,6 @@
 #include "../../lib/measures/measures.h"
 #include "../../lib/tools/libtools.h"
 
-
 void usage(char *progname, void *argtable) {
       printf("\nUsage:\n\t%s", progname);
       arg_print_syntax(stdout,argtable,"\n");
@@ -33,9 +32,6 @@ void usage(char *progname, void *argtable) {
       printf("\n");
       exit(0);
 }
-
-
-
 
 int main(int argc, char *argv[])
 {
@@ -48,16 +44,15 @@ int main(int argc, char *argv[])
     parameters=malloc(sizeof(LOCAL_PARAMS));
     datainfo=malloc(sizeof(DATAINFO));
     char *list_dist;
-    int num_of_layers=1;
     unsigned num_of_seeds;
     unsigned* seeds;
     int* segment_map;
     char *list;
     int size_val = 1;
 
-    struct arg_str  *inp   = arg_str1("i","input","<file_name>","name of input files (GRID)");
+    struct arg_str  *inp   = arg_strn("i","input","<file_name>",1,9999,"name of input files (GRID)");
     struct arg_str  *out   = arg_str1("o","output","<file_name>","name of output file with segments (TIFF)");
-    struct arg_str  *shp   = arg_str0("v","vector","<file_name>","name of output vector file with segments (SHP)");
+    struct arg_str  *shp   = arg_str0("v","vector","<file_name>","name of output vector file with segments (GPKG)");
     struct arg_int  *size  = arg_int0(NULL,"size","<n>","output resolution modifier (default: 1)");
     struct arg_str  *mes   = arg_str0("m","measure","<measure_name>","similarity measure (use -l to list all measures; default: jsd)");
     struct arg_lit  *mesl  = arg_lit0("l","list_measures","list all measures");
@@ -83,6 +78,7 @@ int main(int argc, char *argv[])
                         th,help,end};
 
     int nerrors = arg_parse(argc,argv,argtable);
+    int num_of_layers = inp->count;
 
     if (help->count > 0) 
       usage(argv[0],argtable);
@@ -107,10 +103,11 @@ int main(int argc, char *argv[])
     else
       omp_set_num_threads(1);
 
-
-    if(!ezgdal_file_exists(inp->sval[0])) {
-      printf("\nInput file [%s] does not exist\n\n",inp->sval[0]);
-      exit(0);
+    for(int i=0; i<inp->count; i++){
+      if(!ezgdal_file_exists(inp->sval[i])) {
+        printf("\nInput file [%s] does not exist\n\n",inp->sval[i]);
+      usage(argv[0],argtable);
+      }
     }
 
     if(flag_skip_growing->count>0 && flag_skip_hierarchical->count>0) {
@@ -193,44 +190,19 @@ int main(int argc, char *argv[])
     } else 
       parameters->calculate = get_distance("jsd");
 
+	  datainfo = malloc(num_of_layers*sizeof(DATAINFO*));
 
-//    int i;
-    datainfo=malloc(num_of_layers*sizeof(DATAINFO*));
+	  for(int i=0; i<num_of_layers; ++i) {
+	    datainfo[i] = malloc(num_of_layers*sizeof(DATAINFO*));
+      init_grid_datainfo(datainfo[i],(char *)(inp->sval[i]),(char *)(out->sval[0]));
 
-/*
-	for(i=0;i<num_of_layers;++i) {
-		datainfo[i]=malloc(num_of_layers*sizeof(DATAINFO));
-		init_grid_datainfo(datainfo[i],opt_input_grids->answers[i],"OUTPUT",0);
-		if(i)
-			compare_grids_datainfo(datainfo[i-1], datainfo[i]);
-	}
-
-
-	G_message("Read data...");
-
-	for(i=0;i<num_of_layers;++i)
-		read_histograms_to_memory(datainfo[i],parameters);
-*/
-
-    datainfo[0]=malloc(sizeof(DATAINFO));
-
-
-//rewrite:
-    init_grid_datainfo(datainfo[0],(char *)(inp->sval[0]),(char *)(out->sval[0]));
-    read_signatures_to_memory(datainfo[0]);
-/*
-i=0;
-while(datainfo[0]->all_histograms[i]==NULL) i++;
-printf("i: %d\n",i);
-for(j=0; j<10; j++)
-  printf("h[%d]: %lf\n",j,datainfo[0]->all_histograms[i][j]);
-*/
+      read_signatures_to_memory(datainfo[i]);
+    }
 
     hexgrid = hex_build_topology(datainfo,parameters,num_of_layers,0);
     areas = hex_build_areas(datainfo,hexgrid,parameters);
     results = hex_init_results(hexgrid);
     parameters->parameters = init_measure_parameters(datainfo[0]->size_of_histogram,0); /* we will use distance instead of similarity */
-
 
    /* seeding starts here */
    seeds = hex_find_seeds(hexgrid,parameters,areas,&num_of_seeds);
