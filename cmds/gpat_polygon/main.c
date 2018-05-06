@@ -142,8 +142,6 @@ int main(int argc, char **argv) {
         usage(argv[0],argtable);
       }
 
-
-
     EZGDAL_LAYER **input_layers;
 
     ninputs++;
