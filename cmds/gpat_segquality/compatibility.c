@@ -196,9 +196,10 @@ int init_grid_datainfo(DATAINFO* d, char* filename, char* outputname) {
     return 0;
 }
 
+/*
 double* parse_weights(int num_of_layers, char* weights)
 {
-    /* parser */
+    // parser
     
     if(num_of_layers==1 && weights) {
         G_warning("Ignore weights for a single-layer segmentation");
@@ -210,7 +211,7 @@ double* parse_weights(int num_of_layers, char* weights)
     
     int i;
     double* parsed=calloc(num_of_layers,sizeof(double));
-    if(num_of_layers>1 && !weights) { /* set weights to equal 1/n */
+    if(num_of_layers>1 && !weights) { // set weights to equal 1/n 
     for(i=0;i<num_of_layers;++i)
         parsed[i]=1./(double)num_of_layers;
         return parsed;
@@ -234,7 +235,7 @@ double* parse_weights(int num_of_layers, char* weights)
     if(col>num_of_layers)
         G_fatal_error("Too few weights. Expected: %d",num_of_layers);
     
-    /* recalculate so we can put any list of numbers to estabilish proportions */
+    // recalculate so we can put any list of numbers to estabilish proportions
     double sum=0;
     
     for(i=0;i<num_of_layers;++i) {
@@ -251,7 +252,7 @@ double* parse_weights(int num_of_layers, char* weights)
     
     return parsed;
 }
-
+*/
 
 int read_signatures_to_memory(DATAINFO* d) {
     int r,c, size;
