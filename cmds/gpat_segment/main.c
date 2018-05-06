@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     struct arg_lit  *mesl  = arg_lit0("l","list_measures","list all measures");
     struct arg_dbl  *lower_threshold  = arg_dbl0(NULL,"lthreshold","<double>","minimum distance threshold to build areas (default: 0.1)");
     struct arg_dbl  *upper_threshold  = arg_dbl0(NULL,"uthreshold","<double>","maximum distance threshold to build areas (default: 0.3");
-    struct arg_str  *weights    = arg_str0("w","weights","<weight,weight>","multilayer only: weights for the multilayer mode");
+    struct arg_str  *weights    = arg_str0("w","weights","<integer,integer>","multilayer only: weights for the multilayer mode");
     struct arg_dbl  *swap       = arg_dbl0(NULL,"swap","<double>","improve segmentation by swapping unmatched areas. -1 to skip (default: 0.001)");
     struct arg_int  *minarea    = arg_int0(NULL,"minarea","<n>","minimum number of motifels in individual segment (default: 0)");
     struct arg_int  *maxhist    = arg_int0(NULL,"maxhist","<n>","create similarity/distance matrix for maxhist histograms; leave 0 to use all (default: 200)");
@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
     }
 
     if(weights->count>0)
-        weights_val = weights->sval[0];
+        weights_val = (char *)(weights->sval[0]);
 
     if(swap->count>0)
       parameters->swap_threshold=swap->dval[0];
@@ -181,7 +181,8 @@ int main(int argc, char *argv[])
     parameters->complete_linkage=(flag_complete->count>0);
     parameters->null_threshold = 0.5;
     parameters->all_layers=(flag_all->count>0);
-    if(parameters->all_layers && weights->sval[0])
+    
+    if(parameters->all_layers && weights_val)
         G_warning("Ignore weigths in the <all layers> mode");
 
     if(mes->count > 0) {
@@ -207,7 +208,7 @@ int main(int argc, char *argv[])
       read_signatures_to_memory(datainfo[i]);
     }
 
-    hexgrid = hex_build_topology(datainfo,parameters,num_of_layers,(char *)(weights_val));
+    hexgrid = hex_build_topology(datainfo,parameters,num_of_layers,weights_val);
     areas = hex_build_areas(datainfo,hexgrid,parameters);
     results = hex_init_results(hexgrid);
     parameters->parameters = init_measure_parameters(datainfo[0]->size_of_histogram,0); /* we will use distance instead of similarity */
