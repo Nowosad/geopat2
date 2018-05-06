@@ -58,6 +58,7 @@ int main(int argc, char *argv[])
     struct arg_lit  *mesl  = arg_lit0("l","list_measures","list all measures");
     struct arg_dbl  *lower_threshold  = arg_dbl0(NULL,"lthreshold","<double>","minimum distance threshold to build areas (default: 0.1)");
     struct arg_dbl  *upper_threshold  = arg_dbl0(NULL,"uthreshold","<double>","maximum distance threshold to build areas (default: 0.3");
+    // struct arg_str  *weights    = arg_dbl0(NULL,"weights","","");
     struct arg_dbl  *swap  = arg_dbl0(NULL,"swap","<double>","improve segmentation by swapping unmatched areas. -1 to skip (default: 0.001)");
     struct arg_int  *minarea    = arg_int0(NULL,"minarea","<n>","minimum number of motifels in individual segment (default: 0)");
     struct arg_int  *maxhist    = arg_int0(NULL,"maxhist","<n>","create similarity/distance matrix for maxhist histograms; leave 0 to use all (default: 200)");
