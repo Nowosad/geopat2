@@ -116,22 +116,6 @@ int main(int argc, char **argv) {
       ninputs=inp->count;
     }
 
-    if(sign->count>0 && strcmp(sign->sval[0],"fdec")==0) {
-      if((size_val != 0) && ((size_val & (~size_val + 1)) != size_val)) {
-        printf("\nFor the full decomposition, size has to be a power of two.\n\n");
-        exit(0);
-      }
-    
-      if(lvl->count>0) {
-        level_val = lvl->ival[0];
-        if(level_val<0 || (1<<(level_val-1))>size_val) {
-          printf("\nFor the full decomposition, 2^level cannot be greater then size.\nThe 'level' parameter is corrected by program.\n\n");
-          level_val = 0;
-        }
-      }
-    }
-
-
     if(norm->count > 0) {
       norm_func = get_normalization_method((char *)(norm->sval[0]));
       /* signature not found */
@@ -151,6 +135,21 @@ int main(int argc, char **argv) {
         printf("\nSize can not be less then 10\n\n");
         exit(0);
       }
+    }
+    
+    if(sign->count>0 && strcmp(sign->sval[0],"fdec")==0) {
+        if((size_val != 0) && ((size_val & (~size_val + 1)) != size_val)) {
+            printf("\nFor the full decomposition, size has to be a power of two.\n\n");
+            exit(0);
+        }
+        
+        if(lvl->count>0) {
+            level_val = lvl->ival[0];
+            if(level_val<0 || (1<<(level_val-1))>size_val) {
+                printf("\nFor the full decomposition, 2^level cannot be greater than the size.\nThe 'level' parameter is corrected by program.\n\n");
+                level_val = 0;
+            }
+        }
     }
 
     if(!((x->count>0 && y->count>0) || (xy->count>0))) {
