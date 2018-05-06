@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
     int* segment_map;
     char *list;
     int size_val = 1;
-    char weights_val;
+    // char weights_val;
 
     struct arg_str  *inp   = arg_strn("i","input","<file_name>",1,9999,"name of input files (GRID)");
     struct arg_str  *out   = arg_str1("o","output","<file_name>","name of output file with segments (TIFF)");
@@ -59,14 +59,15 @@ int main(int argc, char *argv[])
     struct arg_lit  *mesl  = arg_lit0("l","list_measures","list all measures");
     struct arg_dbl  *lower_threshold  = arg_dbl0(NULL,"lthreshold","<double>","minimum distance threshold to build areas (default: 0.1)");
     struct arg_dbl  *upper_threshold  = arg_dbl0(NULL,"uthreshold","<double>","maximum distance threshold to build areas (default: 0.3");
-    struct arg_str  *weights    = arg_str0("w","weights","<weight,weight>","lalal");
-    struct arg_dbl  *swap  = arg_dbl0(NULL,"swap","<double>","improve segmentation by swapping unmatched areas. -1 to skip (default: 0.001)");
+    struct arg_str  *weights    = arg_str0("w","weights","<weight,weight>","multilayer only: weights for the multilayer mode");
+    struct arg_dbl  *swap       = arg_dbl0(NULL,"swap","<double>","improve segmentation by swapping unmatched areas. -1 to skip (default: 0.001)");
     struct arg_int  *minarea    = arg_int0(NULL,"minarea","<n>","minimum number of motifels in individual segment (default: 0)");
     struct arg_int  *maxhist    = arg_int0(NULL,"maxhist","<n>","create similarity/distance matrix for maxhist histograms; leave 0 to use all (default: 200)");
     struct arg_lit  *flag_complete          = arg_lit0("c","complete","use complete linkage (default is average)");
-//    struct arg_lit  *flag_threshold         = arg_lit0("d","th_map","calculate threshold layer and exit (all params are ignored)");
+//  struct arg_lit  *flag_threshold         = arg_lit0("d","th_map","calculate threshold layer and exit (all params are ignored)");
     struct arg_lit  *flag_skip_growing      = arg_lit0("g","no_growing","skip growing phase");
-    struct arg_lit  *flag_skip_hierarchical  = arg_lit0("a","no_hierarchical","skip hierarchical phase");
+    struct arg_lit  *flag_skip_hierarchical = arg_lit0("r","no_hierarchical","skip hierarchical phase");
+    struct arg_lit  *flag_all               = arg_lit0("a","all_layers","multilayer only: compare a threshold against all layers instead of an average");
     struct arg_lit  *flag_quad              = arg_lit0("q","quad","quad mode (rook topology)");
     struct arg_int  *th    = arg_int0("t",NULL,"<n>","number of threads (default: 1)");
     struct arg_lit  *help  = arg_lit0("h","help","print help and exit");
@@ -76,7 +77,7 @@ int main(int argc, char *argv[])
                         lower_threshold,upper_threshold, weights,
                         swap,minarea,maxhist,
                         flag_complete,/*flag_threshold,*/flag_skip_growing,
-                        flag_skip_hierarchical,flag_quad,
+                        flag_skip_hierarchical,flag_all,flag_quad,
                         th,help,end};
 
     int nerrors = arg_parse(argc,argv,argtable);
@@ -113,7 +114,7 @@ int main(int argc, char *argv[])
     }
 
     if(flag_skip_growing->count>0 && flag_skip_hierarchical->count>0) {
-      printf("\nOnly one flag of -a or -g can be used\n\n");
+      printf("\nOnly one flag of -r or -g can be used\n\n");
       exit(0);
     }
 
@@ -181,7 +182,9 @@ int main(int argc, char *argv[])
     parameters->quad_mode=(flag_quad->count>0);
     parameters->complete_linkage=(flag_complete->count>0);
     parameters->null_threshold = 0.5;
-    parameters->all_layers = 0;
+    parameters->all_layers=(flag_all->count>0);
+    if(parameters->all_layers && weights->sval[0])
+        G_warning("Ignore weigths in the <all layers> mode");
 
     if(mes->count > 0) {
       parameters->calculate = get_distance((char *)(mes->sval[0]));
