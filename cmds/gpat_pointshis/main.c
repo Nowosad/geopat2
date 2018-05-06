@@ -1,7 +1,7 @@
 /****************************************************************************
  *
  * PROGRAM:	gpat_pointshis - part of GeoPAT 2
- * AUTHOR(S):	Pawel Netzel
+ * AUTHOR(S):	Pawel Netzel, Jakub Nowosad
  * PURPOSE:	program for calculating a signature of a surrounding of a point
  *		or a set of points;
  *		functionality based on p.sig.point from
