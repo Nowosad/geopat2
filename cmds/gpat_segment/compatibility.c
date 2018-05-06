@@ -158,8 +158,6 @@ S_PARAMS* init_measure_parameters(int size_of_histogram, int measure) {
     return p;
 }
 
-
-
 int init_grid_datainfo(DATAINFO* d, char* filename, char* outputname) {
 
     SML_DATA_HEADER  *dh = sml_open_layer(filename);
@@ -186,18 +184,70 @@ int init_grid_datainfo(DATAINFO* d, char* filename, char* outputname) {
     d->cell_hd.west = dh->file_win->at[0];
     d->cell_hd.east = d->cell_hd.west + d->cell_hd.cols * d->cell_hd.ew_res;
     d->pattern_size = 1;
-    d->buffer=NULL; /*malloc(nhists*(d->size_of_histogram+2)*sizeof(int));*/
+    d->buffer=NULL; // malloc(nhists*(d->size_of_histogram+2)*sizeof(int));
 
-        /* allocate histograms... */
+        // allocate histograms... 
     d->histograms = NULL;
-    /*d->histograms=malloc(nhists*sizeof(HISTOGRAM));*/
+    // d->histograms=malloc(nhists*sizeof(HISTOGRAM));
 
 
     return 0;
 }
 
-double* parse_weights(int num_of_layers, char* weights) {
-    return NULL;
+double* parse_weights(int num_of_layers, char* weights)
+{
+	/* parser */
+
+	if(num_of_layers==1 && weights) {
+		G_warning("Ignore weights for a single-layer segmentation");
+		return NULL;
+	}
+
+	if(num_of_layers==1)
+		return NULL;
+
+	int i;
+	double* parsed=calloc(num_of_layers,sizeof(double));
+	if(num_of_layers>1 && !weights) { /* set weights to equal 1/n */
+		for(i=0;i<num_of_layers;++i)
+			parsed[i]=1./(double)num_of_layers;
+		return parsed;
+	}
+
+	char buf[10000];
+	strcpy(buf,weights);
+	char delim[2]=",";
+	char* token;
+
+	token=strtok(buf,delim);
+	int col=0;
+
+	while(token) {
+		if(col>num_of_layers)
+			G_fatal_error("Too many weights. Expected: %d",num_of_layers);
+		parsed[col]=atoi(token);
+		token=strtok(NULL,delim);
+		col++;
+	}
+	if(col>num_of_layers)
+		G_fatal_error("Too few weights. Expected: %d",num_of_layers);
+
+	/* recalculate so we can put any list of numbers to estabilish proportions */
+	double sum=0;
+
+	for(i=0;i<num_of_layers;++i) {
+		if(parsed[i]<=0)
+			G_fatal_error("Sum of weights cannot be zero");
+		sum+=parsed[i];
+	}
+
+	if(sum==0)
+		G_fatal_error("Sum of weights cannot be zero");
+
+	for(i=0;i<num_of_layers;++i)
+		parsed[i]/=sum;
+
+	return parsed;
 }
 
 int read_signatures_to_memory(DATAINFO* d) {
