@@ -1,6 +1,7 @@
 # 2018-05-06
 
 - Initial support for a multi-layer segmentation added
+- The full decomposition signature issue fixed for gpat_pointshis
 
 # 2018-04-29
 
