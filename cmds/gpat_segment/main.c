@@ -49,6 +49,7 @@ int main(int argc, char *argv[])
     int* segment_map;
     char *list;
     int size_val = 1;
+    char weights_val;
 
     struct arg_str  *inp   = arg_strn("i","input","<file_name>",1,9999,"name of input files (GRID)");
     struct arg_str  *out   = arg_str1("o","output","<file_name>","name of output file with segments (TIFF)");
@@ -58,7 +59,7 @@ int main(int argc, char *argv[])
     struct arg_lit  *mesl  = arg_lit0("l","list_measures","list all measures");
     struct arg_dbl  *lower_threshold  = arg_dbl0(NULL,"lthreshold","<double>","minimum distance threshold to build areas (default: 0.1)");
     struct arg_dbl  *upper_threshold  = arg_dbl0(NULL,"uthreshold","<double>","maximum distance threshold to build areas (default: 0.3");
-    // struct arg_str  *weights    = arg_dbl0(NULL,"weights","","");
+    struct arg_str  *weights    = arg_str0("w","weights","<weight,weight>","lalal");
     struct arg_dbl  *swap  = arg_dbl0(NULL,"swap","<double>","improve segmentation by swapping unmatched areas. -1 to skip (default: 0.001)");
     struct arg_int  *minarea    = arg_int0(NULL,"minarea","<n>","minimum number of motifels in individual segment (default: 0)");
     struct arg_int  *maxhist    = arg_int0(NULL,"maxhist","<n>","create similarity/distance matrix for maxhist histograms; leave 0 to use all (default: 200)");
@@ -72,7 +73,7 @@ int main(int argc, char *argv[])
     struct arg_end  *end   = arg_end(20);
 
     void* argtable[] = {inp,out,shp,size,mes,mesl,
-                        lower_threshold,upper_threshold,
+                        lower_threshold,upper_threshold, weights,
                         swap,minarea,maxhist,
                         flag_complete,/*flag_threshold,*/flag_skip_growing,
                         flag_skip_hierarchical,flag_quad,
@@ -142,6 +143,11 @@ int main(int argc, char *argv[])
       printf("\nUpper distance threshold cannot be smaller than lower threshold\n\n");
       exit(0);
     }
+    
+    if(weights->count>0)
+        weights->sval[0];
+    else
+        weights_val = weights->sval[0];
 
     if(swap->count>0)
       parameters->swap_threshold=swap->dval[0];
@@ -200,13 +206,13 @@ int main(int argc, char *argv[])
       read_signatures_to_memory(datainfo[i]);
     }
 
-    hexgrid = hex_build_topology(datainfo,parameters,num_of_layers,0);
+    hexgrid = hex_build_topology(datainfo,parameters,num_of_layers,(char *)(weights->sval[0]));
     areas = hex_build_areas(datainfo,hexgrid,parameters);
     results = hex_init_results(hexgrid);
     parameters->parameters = init_measure_parameters(datainfo[0]->size_of_histogram,0); /* we will use distance instead of similarity */
 
    /* seeding starts here */
-   seeds = hex_find_seeds(hexgrid,parameters,areas,&num_of_seeds);
+    seeds = hex_find_seeds(hexgrid,parameters,areas,&num_of_seeds);
 
   /* thresholds only */
 /*
