@@ -250,7 +250,6 @@ printf("r: %d, c: %d, n: %d, len: %d, hist: %d, mx: %d, max: %lf, min: %lf\n",ro
       int line = 1;
       while(read_xy_txt(line++,fxy,&coord_x,&coord_y,desc_text, MAX_DESC_LEN)) {
 
-
         col = ezgdal_xy2c(input_layers[0],coord_x,coord_y) - size_val/2;
         row = ezgdal_xy2r(input_layers[0],coord_x,coord_y) - size_val/2;
         for(i=0; i<ninputs; i++) {

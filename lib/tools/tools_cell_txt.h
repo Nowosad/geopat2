@@ -12,6 +12,4 @@ int read_dblbuf_txt(FILE *f, double *x, double *y, char *desc, double *buffer, i
 int read_xy_txt(int line, FILE *f, double *x, double *y, char *desc, int max_size);
 char *create_fname(char *desc);
 
-
 #endif
-
