@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
     int* segment_map;
     char *list;
     int size_val = 1;
-    // char weights_val;
+    char *weights_val = NULL;;
 
     struct arg_str  *inp   = arg_strn("i","input","<file_name>",1,9999,"name of input files (GRID)");
     struct arg_str  *out   = arg_str1("o","output","<file_name>","name of output file with segments (TIFF)");
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
     struct arg_end  *end   = arg_end(20);
 
     void* argtable[] = {inp,out,shp,size,mes,mesl,
-                        lower_threshold,upper_threshold, weights,
+                        lower_threshold,upper_threshold,weights,
                         swap,minarea,maxhist,
                         flag_complete,/*flag_threshold,*/flag_skip_growing,
                         flag_skip_hierarchical,flag_all,flag_quad,
@@ -144,10 +144,8 @@ int main(int argc, char *argv[])
       printf("\nUpper distance threshold cannot be smaller than lower threshold\n\n");
       exit(0);
     }
-    
+
     if(weights->count>0)
-        weights->sval[0];
-    else
         weights_val = weights->sval[0];
 
     if(swap->count>0)
@@ -209,7 +207,7 @@ int main(int argc, char *argv[])
       read_signatures_to_memory(datainfo[i]);
     }
 
-    hexgrid = hex_build_topology(datainfo,parameters,num_of_layers,(char *)(weights->sval[0]));
+    hexgrid = hex_build_topology(datainfo,parameters,num_of_layers,(char *)(weights_val));
     areas = hex_build_areas(datainfo,hexgrid,parameters);
     results = hex_init_results(hexgrid);
     parameters->parameters = init_measure_parameters(datainfo[0]->size_of_histogram,0); /* we will use distance instead of similarity */
