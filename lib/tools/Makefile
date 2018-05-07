@@ -3,8 +3,7 @@ PROG = libtools
 
 COMMON = tools_common.c tools_cell_txt.c
 COMMON_O = $(COMMON:%.c=%.o)
-HEADERS = $(shell ls *.h)
-
+HEADERS = tools_common.h tools_cell_txt.h
 
 all install: $(PROG).h $(PROG).a
 
@@ -16,10 +15,6 @@ $(PROG).h: $(HEADERS)
 
 $(COMMON_O): $(COMMON) $(HEADERS)
 	$(CC) $(CFLAGS) $(LIBCFLAGS) -c  $(COMMON)
-
-install: $(PROG).a
-	mv -f $(PROG).* ../../../lib
-	cp -f *.h ../../../include
 
 clean:
 	rm -f *.o $(PROG).h $(PROG).a

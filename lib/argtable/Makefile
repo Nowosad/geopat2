@@ -3,8 +3,7 @@ PROG = libargtable3
 
 COMMON = argtable3.c
 COMMON_O = $(COMMON:%.c=%.o)
-HEADERS = $(shell ls *.h)
-
+HEADERS = argtable3.h
 
 all install: $(PROG).a
 
