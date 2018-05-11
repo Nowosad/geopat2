@@ -4,7 +4,7 @@
 /****************************************************************************
  *
  * MODULE:	Signatures library
- * AUTHOR(S):	Pawel Netzel
+ * AUTHOR(S):	Pawel Netzel, Jakub Nowosad
  * COPYRIGHT:	(C) Space Informatics Lab, University of Cincinnati
  *
  *		This program is free software under the GNU General Public
@@ -43,14 +43,13 @@ typedef struct {
 signature_rec signatures_list[] = {
 	{ "prod", cartesianproduct, cartesianproduct_len, "Cartesian product of input category lists" },
 	{ "cooc", coocurrence, coocurrence_len, "Spatial coocurrence of categories" },
-	{ "sdec", decomposition, decomposition_len, "Simple 2-level decomposition" },
 	{ "fdec", full_decomposition, full_decomposition_len, "Full decomposition" },
 	{ "lind", landind, landind_len, "Landscape indices vector" },
 	{ "linds", landind_short, landind_short_len, "Selected landscape indices vector" },
 /*************************
  *
  *   Experimental code
- * 
+  { "sdec", decomposition, decomposition_len, "Simple 2-level decomposition" },
 	{ "lbp", local_binary_pattern, local_binary_pattern_len, "Histogram of local binary patterns" },
 	{ "jcov", jcov, jcov_len, "J-Coocurrence vector" },
  *
