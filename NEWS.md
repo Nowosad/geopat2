@@ -1,5 +1,9 @@
 # Version 2.1
 
+## 2018-05-16
+
+- Multi-layer segmentation works in two modes - all_layers (default) or weights
+
 ## 2018-05-10
 
 - Experimental signature, sdec, removed

@@ -147,8 +147,9 @@ int main(int argc, char *argv[])
     }
     
     if(weights->count==0){
-      parameters->all_layers = 0;
+      parameters->all_layers = 1;
     } else if (weights->count>0){
+      parameters->all_layers = 0;
       weights_val = (char *)(weights->sval[0]);
     }
     
