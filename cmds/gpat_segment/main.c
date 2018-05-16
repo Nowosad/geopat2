@@ -105,8 +105,9 @@ int main(int argc, char *argv[])
       omp_set_num_threads(th->ival[0]);
     else
       omp_set_num_threads(1);
-
-    for(int i=0; i<inp->count; i++){
+  
+    int i;
+    for(i=0; i<inp->count; i++){
       if(!ezgdal_file_exists(inp->sval[i])) {
         printf("\nInput file [%s] does not exist\n\n",inp->sval[i]);
       usage(argv[0],argtable);
@@ -204,7 +205,7 @@ int main(int argc, char *argv[])
 
 	  datainfo = malloc(num_of_layers*sizeof(DATAINFO*));
 
-	  for(int i=0; i<num_of_layers; ++i) {
+	  for(i=0; i<num_of_layers; ++i) {
 	    datainfo[i] = malloc(num_of_layers*sizeof(DATAINFO*));
       init_grid_datainfo(datainfo[i],(char *)(inp->sval[i]),(char *)(out->sval[0]));
 
