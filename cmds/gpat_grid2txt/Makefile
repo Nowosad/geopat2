@@ -1,5 +1,5 @@
 
-PROG = gpat_grd2txt
+PROG = gpat_grid2txt
 
 LIBS = \
 ../../lib/SML/libsml.a \

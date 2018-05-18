@@ -1,5 +1,9 @@
 # Version 2.1
 
+## 2018-05-18
+
+- gpat_grd2txt renamed to gpat_grid2txt
+
 ## 2018-05-16
 
 - Multi-layer segmentation works in two modes - all_layers (default) or weights

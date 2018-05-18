@@ -1,7 +1,7 @@
 /****************************************************************************
  *
- * PROGRAM:	gpat_grd2txt - part of GeoPAT 2
- * AUTHOR(S):	Pawel Netzel
+ * PROGRAM:	gpat_grid2txt - part of GeoPAT 2
+ * AUTHOR(S):	Pawel Netzel, Jakub Nowosad
  * PURPOSE:	program for converting binary grid of motifels to text format;
  * COPYRIGHT:	(C) Pawel Netzel, Space Informatics Lab,
  *		University of Cincinnati
