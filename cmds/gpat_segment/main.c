@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     int size_val = 1;
     char *weights_val = NULL;
 
-    struct arg_str  *inp   = arg_strn("i","input","<file_name>",1,9999,"name of input files (GRID)");
+    struct arg_str  *inp   = arg_strn("i","input","<file_name>",1,9999,"name of input file(s) (GRID)");
     struct arg_str  *out   = arg_str1("o","output","<file_name>","name of output file with segments (TIFF)");
     struct arg_str  *shp   = arg_str0("v","vector","<file_name>","name of output vector file with segments (GPKG)");
     struct arg_int  *size  = arg_int0(NULL,"size","<n>","output resolution modifier (default: 1)");
@@ -204,20 +204,22 @@ int main(int argc, char *argv[])
     } else 
       parameters->calculate = get_distance("jsd");
 
-	  datainfo = malloc(num_of_layers*sizeof(DATAINFO*));
-
-	  
-	  for(i=0; i<num_of_layers; ++i) {
-	    datainfo[i] = malloc(num_of_layers*sizeof(DATAINFO*));
-      init_grid_datainfo(datainfo[i],(char *)(inp->sval[i]),(char *)(out->sval[0]));
-
-      read_signatures_to_memory(datainfo[i]);
+    //datainfo = malloc(num_of_layers*sizeof(DATAINFO*));
+    
+    for(i=0; i<num_of_layers; ++i) {
+        datainfo[i] = malloc(1*sizeof(DATAINFO*));
+        init_grid_datainfo(datainfo[i],(char *)(inp->sval[i]),(char *)(out->sval[0]));
+        read_signatures_to_memory(datainfo[i]);
     }
-
+    
+//    for(i=0; i<num_of_layers; ++i) {
+//        read_signatures_to_memory(datainfo[i]);
+//    }  
+    
     hexgrid = hex_build_topology(datainfo,parameters,num_of_layers,weights_val);
     areas = hex_build_areas(datainfo,hexgrid,parameters);
     results = hex_init_results(hexgrid);
-    parameters->parameters = init_measure_parameters(datainfo[0]->size_of_histogram,0); /* we will use distance instead of similarity */
+    parameters->parameters = init_measure_parameters(datainfo[num_of_layers-1]->size_of_histogram,0); /* we will use distance instead of similarity */
 
    /* seeding starts here */
     seeds = hex_find_seeds(hexgrid,parameters,areas,&num_of_seeds);
@@ -261,9 +263,9 @@ int main(int argc, char *argv[])
     }
 
     hex_reclass(hexgrid,areas);
-    segment_map=hex_create_segment_map(datainfo[0],hexgrid,parameters,areas);
+    segment_map=hex_create_segment_map(datainfo[num_of_layers-1],hexgrid,parameters,areas);
 
-    write_raster(datainfo[0]->dh, (void*)segment_map, (char *)(out->sval[0]), size_val);
+    write_raster(datainfo[num_of_layers-1]->dh, (void*)segment_map, (char *)(out->sval[0]), size_val);
     if(shp->count>0)
 	convert_to_vector((char *)(out->sval[0]),(char *)(shp->sval[0]));
 	
