@@ -106,7 +106,7 @@ void convert_to_vector(char *raster_fname, char *vector_fname) {
     char *srs_txt = (char *)GDALGetProjectionRef(l->dataset_h);
     OGRSpatialReferenceH srs = OSRNewSpatialReference(srs_txt);
     
-    layer = GDALDatasetCreateLayer(dh, "segmentation result", srs, wkbMultiPolygon, NULL );
+    layer = GDALDatasetCreateLayer(dh, "segmentation result", srs, wkbPolygon, NULL );
     if(layer == NULL) {
         ezgdal_show_message(stdout,"Layer creation failed.\n");
         return;

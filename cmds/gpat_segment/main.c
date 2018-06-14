@@ -204,10 +204,10 @@ int main(int argc, char *argv[])
     } else 
       parameters->calculate = get_distance("jsd");
 
-    //datainfo = malloc(num_of_layers*sizeof(DATAINFO*));
+    datainfo = malloc(num_of_layers*sizeof(DATAINFO*));
     
     for(i=0; i<num_of_layers; ++i) {
-        datainfo[i] = malloc(1*sizeof(DATAINFO*));
+        datainfo[i] = malloc(sizeof(DATAINFO));
         init_grid_datainfo(datainfo[i],(char *)(inp->sval[i]),(char *)(out->sval[0]));
         read_signatures_to_memory(datainfo[i]);
     }
