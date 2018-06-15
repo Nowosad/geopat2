@@ -11,8 +11,8 @@ matrix:
       compiler: gcc
       env:
         - MATRIX_EVAL="brew update && brew install gcc && CC=gcc-7 && CXX=g++-7"    
-        - CXX_COMPILER='g++'
-        - C_COMPILER='gcc'
+        - CXX='g++-7'
+        - CC='gcc-'
     - os: linux
 
 before_install:
