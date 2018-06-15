@@ -12,7 +12,6 @@ install:
        sudo apt-get --yes --force-yes update -qq;
        sudo apt-get install --yes libgdal-dev;
        sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/local.conf';
-#   - sudo ldconfig
    fi
 
 script:
