@@ -2,7 +2,7 @@ language: c
 
 sudo: required
 
-compiler: gcc
+compiler: gcc-7
 
 matrix:
   include:
