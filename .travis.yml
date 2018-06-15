@@ -1,13 +1,19 @@
 language: c
 
-os:
-  - linux
-  - osx
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode8
+      env:
+        - MATRIX_EVAL="brew install gcc6 && CC=gcc-6 && CXX=g++-6"
+        
+    - os: linux
+
 
 sudo: required
 
 before_install:
-
+  - eval "${MATRIX_EVAL}"
   - if [[ $TRAVIS_OS_NAME == linux ]]; then
    sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes;
    sudo apt-get --yes --force-yes update -qq;
