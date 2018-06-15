@@ -1,7 +1,7 @@
 /****************************************************************************
  *
  * PROGRAM:	gpat_search - part of GeoPAT 2
- * AUTHOR(S):	Pawel Netzel
+ * AUTHOR(S):	Pawel Netzel, Jakub Nowosad
  * PURPOSE:	program for calculating similarity layer;
  *		functionality based on p.sim.search from
  *		GRASS GeoPAT by Jasiewicz, Netzel, Stepinski
@@ -23,9 +23,8 @@
 #include <math.h>
 #include <omp.h>
 
-#include <sml.h>
-#include <ezgdal.h>
-
+#include "../../lib/ezGDAL/ezgdal.h"
+#include "../../lib/SML/sml.h"
 
 #include "../../lib/argtable/argtable3.h"
 #include "../../lib/measures/measures.h"
@@ -202,34 +201,35 @@ int main(int argc, char **argv) {
 
     nodata=&_nodata;
 
-    if(nodat->count>0) 
+    if(nodat->count>0){
       _nodata = nodat->ival[0];
-
-      dh = sml_open_layer((char *)(inp->sval[0]));
-      ct = (SML_CELL_TYPE *)calloc(1,sizeof(SML_CELL_TYPE));
-
-      size = dh->cell_N_elements;
-      refbuf = malloc(size*sizeof(double));
-
-      f = fopen(ref->sval[0],"r");
-      i=1;
-      while(!feof(f)) {
-        if(0<=sml_read_dblbuf_txt(f,&x,&y,desc,refbuf,size,ct)) {
-          fname = NULL;
-          if(out->count==0)
-            fname = create_fname(desc);
-          else
-            fname = create_fname((char *)(out->sval[0]));
-          if(fname!=NULL) {
-            calc_simil_layer(dh, fname, refbuf, dtype, palette, nodata, func);
-            free(fname);
-          }
+    }
+    
+    dh = sml_open_layer((char *)(inp->sval[0]));
+    ct = (SML_CELL_TYPE *)calloc(1,sizeof(SML_CELL_TYPE));
+    
+    size = dh->cell_N_elements;
+    refbuf = malloc(size*sizeof(double));
+    
+    f = fopen(ref->sval[0],"r");
+    i=1;
+    while(!feof(f)) {
+      if(0<=sml_read_dblbuf_txt(f,&x,&y,desc,refbuf,size,ct)) {
+        fname = NULL;
+        if(out->count==0)
+          fname = create_fname(desc);
+        else
+          fname = create_fname((char *)(out->sval[0]));
+        if(fname!=NULL) {
+          calc_simil_layer(dh, fname, refbuf, dtype, palette, nodata, func);
+          free(fname);
         }
-        i++;
       }
-
-      free(refbuf);
-      fclose(f);
+      i++;
+    }
+    
+    free(refbuf);
+    fclose(f);
 
     sml_free_cell_type(ct);
     sml_close_layer(dh);

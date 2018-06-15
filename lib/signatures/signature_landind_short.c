@@ -13,7 +13,7 @@
  *****************************************************************************/
 #include "signature_landind_macro.h"
 #include "signature_landind_lips.h"
-#include <ezgdal.h>
+#include "../../lib/ezGDAL/ezgdal.h"
 #include <stdarg.h>
 
 int landind_short(EZGDAL_FRAME **frames, int num_of_frames, double *signature, int signature_len, ...)

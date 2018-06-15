@@ -2,6 +2,8 @@
 PROG = gpat_segment
 
 LIBS = \
+../../lib/SML/libsml.a \
+../../lib/ezGDAL/libezgdal.a \
 ../../lib/signatures/libsignatures.a \
 ../../lib/measures/libmeasures.a \
 ../../lib/tools/libtools.a \

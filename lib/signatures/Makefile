@@ -7,7 +7,6 @@ COMMON = signatures_interface.c
 COMMON_O = $(COMMON:%.c=%.o)
 HEADERS = $(shell ls *.h)
 
-
 all install: $(PROG).a
 
 $(PROG).a: $(SIGNATURES_O) $(COMMON_O)

@@ -1,10 +1,10 @@
-# GeoPAT 2.0
+# GeoPAT 2
 
 [![Build Status](https://travis-ci.org/Nowosad/geopat2.svg?branch=master)](https://travis-ci.org/Nowosad/geopat2)
 
 ## Overview
 
-GeoPAT 2.0 (Geospatial Pattern Analysis Toolbox) is a standalone suite of modules written in C and dedicated to analysis of large Earth Science datasets in their entirety using spatial and/or temporal patterns. 
+GeoPAT 2 (Geospatial Pattern Analysis Toolbox) is a standalone suite of modules written in C and dedicated to analysis of large Earth Science datasets in their entirety using spatial and/or temporal patterns. 
 Global scale, high resolution spatial datasets are available but are mostly used in small pieces for local studies. 
 GeoPAT enables studying them in their entirety.
 GeoPAT’s core idea is to tessellate global spatial data into grid of square blocks of original cells (pixels).
@@ -15,16 +15,16 @@ This enables spatial analysis such as search, change detection, segmentation, an
 
 ![](https://github.com/Nowosad/geopat2_manual/raw/master/figs/logo.png)
 
-The GeoPAT 2.0 software and manual are available at http://sil.uc.edu/cms/index.php?id=geopat2.
+The GeoPAT 2 software and manual are available at http://sil.uc.edu/cms/index.php?id=geopat2.
 
 ## Installation
 
-Installation instruction can be found in the [GeoPAT 2.0 manual](https://rawgit.com/Nowosad/geopat2_manual/master/output/GeoPAT2_Manual.pdf). 
-Additionally, the [.travis](https://github.com/Nowosad/geopat2/blob/master/.travis.yml) file contains code used for  GeoPAT 2.0 installation.
+Installation instruction can be found in the [GeoPAT 2 manual](https://rawgit.com/Nowosad/geopat2_manual/master/output/GeoPAT2_Manual.pdf). 
+Additionally, the [.travis](https://github.com/Nowosad/geopat2/blob/master/.travis.yml) file contains code used for GeoPAT 2 installation.
 
-## How to cite GeoPAT 2.0
+## How to cite GeoPAT 2
 
-**Netzel P., Nowosad J., Jasiewicz J., Niesterowicz J, Stepinski T.**, 2018. *GeoPAT 2.0: user's manual*. Zenodo. http://doi.org/10.5281/zenodo.1185408
+**Netzel P., Nowosad J., Jasiewicz J., Niesterowicz J, Stepinski T.**, 2018. *GeoPAT 2: user's manual*. Zenodo. http://doi.org/10.5281/zenodo.1291123
 
 ## GeoPAT related papers
 

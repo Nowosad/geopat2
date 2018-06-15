@@ -18,7 +18,7 @@
 #include <omp.h>
 #include "local_proto.h"
 
-#include <ezgdal.h>
+#include "../../lib/ezGDAL/ezgdal.h"
 
 #include "../../lib/argtable/argtable3.h"
 #include "../../lib/measures/measures.h"
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
     struct arg_int  *maxhist       = arg_int0(NULL,"maxhist","<n>","create similarity/distance matrix for maxhist histograms; leave 0 to use all (default: 200)");
     struct arg_lit  *flag_complete = arg_lit0("c","complete","use complete linkage (default is average)");
     struct arg_lit  *flag_quad     = arg_lit0("q","quad","quad mode (rook topology)");
-    struct arg_lit  *flag_noweight   = arg_lit0("w","no_weight","switch off edge-based weighting in isolation");
+    struct arg_lit  *flag_noweight = arg_lit0("w","no_weight","switch off edge-based weighting in isolation");
     struct arg_int  *th            = arg_int0("t",NULL,"<n>","number of threads (default: 1)");
     struct arg_lit  *help          = arg_lit0("h","help","print help and exit");
     struct arg_end  *end           = arg_end(20);

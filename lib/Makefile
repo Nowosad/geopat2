@@ -1,5 +1,7 @@
 
 SUBDIRS= \
+ezGDAL \
+SML \
 argtable \
 measures \
 normalization \

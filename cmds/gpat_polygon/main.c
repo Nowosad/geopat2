@@ -23,9 +23,8 @@
 #include <float.h>
 #include <omp.h>
 
-#include <sml.h>
-#include <ezgdal.h>
-
+#include "../../lib/ezGDAL/ezgdal.h"
+#include "../../lib/SML/sml.h"
 
 #include "../../lib/argtable/argtable3.h"
 #include "../../lib/signatures/signatures.h"
@@ -142,8 +141,6 @@ int main(int argc, char **argv) {
         printf("\nFile '%s' does not exists!\n\n", inp->sval[i]);
         usage(argv[0],argtable);
       }
-
-
 
     EZGDAL_LAYER **input_layers;
 

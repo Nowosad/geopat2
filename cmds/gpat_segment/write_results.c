@@ -14,8 +14,8 @@
  *		https://www.gnu.org/licenses/gpl-3.0.en.html
  *
  *****************************************************************************/
-#include <ezgdal.h>
-#include <sml.h>
+#include "../../lib/ezGDAL/ezgdal.h"
+#include "../../lib/SML/sml.h"
 #include <gdal.h>
 #include <gdal_alg.h>
 #include <ogr_srs_api.h>
@@ -91,9 +91,9 @@ void convert_to_vector(char *raster_fname, char *vector_fname) {
         return;
     }
 
-    driver = GDALGetDriverByName("ESRI Shapefile");
+    driver = GDALGetDriverByName("GPKG");
     if(driver == NULL) {
-        ezgdal_show_message(stdout,"ESRI Shapefile driver not available.\n");
+        ezgdal_show_message(stdout,"GPKG driver not available.\n");
         return;
     }
     
@@ -120,11 +120,10 @@ void convert_to_vector(char *raster_fname, char *vector_fname) {
     }
     OGR_Fld_Destroy(field);
     
-    GDALPolygonize(l->band_h, NULL, layer, 0, NULL, NULL, NULL);
+    GDALPolygonize(l->band_h, l->band_h, layer, 0, NULL, NULL, NULL);
     
     GDALClose(dh);
-//    OSRDestroySpatialReference(srs);
-
+    //    OSRDestroySpatialReference(srs);
 
     ezgdal_close_layer(l);
 }

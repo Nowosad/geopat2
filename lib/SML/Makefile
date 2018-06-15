@@ -1,9 +1,9 @@
 
-PROG = libtools
+PROG = libsml
 
-COMMON = tools_common.c tools_cell_txt.c
+COMMON =  smllib.c smltxt.c
 COMMON_O = $(COMMON:%.c=%.o)
-HEADERS = tools_common.h tools_cell_txt.h
+HEADERS = sml.h
 
 all install: $(PROG).h $(PROG).a
 

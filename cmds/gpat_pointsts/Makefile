@@ -2,6 +2,8 @@
 PROG = gpat_pointsts
 
 LIBS = \
+../../lib/SML/libsml.a \
+../../lib/ezGDAL/libezgdal.a \
 ../../lib/argtable/libargtable3.a \
 ../../lib/tools/libtools.a
 

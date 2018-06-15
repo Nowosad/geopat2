@@ -14,7 +14,7 @@
  *****************************************************************************/
 
 #include <stdarg.h>
-#include <ezgdal.h>
+#include "../../lib/ezGDAL/ezgdal.h"
 
 typedef int signature_func(EZGDAL_FRAME**, int, double*, int, ...);
 typedef int signature_len_func(EZGDAL_LAYER**, int, ...);

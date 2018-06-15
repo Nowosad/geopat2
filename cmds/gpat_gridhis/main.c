@@ -1,7 +1,7 @@
 /****************************************************************************
  *
  * PROGRAM:	gpat_gridhis - part of GeoPAT 2
- * AUTHOR(S):	Pawel Netzel
+ * AUTHOR(S):	Pawel Netzel, Jakub Nowosad
  * PURPOSE:	program for creating a grids of motifels;
  *		functionality based on p.sig.grid from
  *		GRASS GeoPAT by Jasiewicz, Netzel, Stepinski
@@ -23,9 +23,8 @@
 #include <math.h>
 #include <omp.h>
 
-#include <sml.h>
-#include <ezgdal.h>
-
+#include "../../lib/ezGDAL/ezgdal.h"
+#include "../../lib/SML/sml.h"
 
 #include "../../lib/argtable/argtable3.h"
 #include "../../lib/signatures/signatures.h"
@@ -49,7 +48,7 @@ int main(int argc, char **argv) {
 
     int size_val = 150;
     int shift_val = 100;
-    int level_val = 0;
+    int level_val;
     signature_func *sign_func = get_signature("cooc");
     signature_len_func *sign_len_func = get_signature_len("cooc");
     normalization_func *norm_func = get_normalization_method("pdf");
@@ -137,13 +136,19 @@ int main(int argc, char **argv) {
         printf("\nFor the full decomposition, size has to be a power of two.\n\n");
         exit(0);
       }
-    
+      
+      // calculate the full decomposition level
+      int max_level_val = log2(size_val);
+        
       if(lvl->count>0) {
         level_val = lvl->ival[0];
-        if(level_val<0 || (1<<(level_val-1))>size_val) {
-          printf("\nFor the full decomposition, 2^level cannot be greater then size.\nThe 'level' parameter is corrected by program.\n\n");
-          level_val = 0;
-        }
+        if(level_val<0 || level_val>max_level_val) {
+          printf("\nFor the full decomposition, 2^level cannot be greater than the size.\nThe 'level' parameter is corrected by program.\n\n");
+          level_val = max_level_val;
+        } 
+      } else {
+          // if level is not set
+          level_val = max_level_val;
       }
     }
 

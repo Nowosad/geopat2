@@ -1,7 +1,7 @@
 /****************************************************************************
  *
- * PROGRAM:	gpat_grd2txt - part of GeoPAT 2
- * AUTHOR(S):	Pawel Netzel
+ * PROGRAM:	gpat_grid2txt - part of GeoPAT 2
+ * AUTHOR(S):	Pawel Netzel, Jakub Nowosad
  * PURPOSE:	program for converting binary grid of motifels to text format;
  * COPYRIGHT:	(C) Pawel Netzel, Space Informatics Lab,
  *		University of Cincinnati
@@ -21,12 +21,13 @@
 #include <math.h>
 #include <omp.h>
 
-#include <sml.h>
-#include <ezgdal.h>
-
+#include "../../lib/ezGDAL/ezgdal.h"
+#include "../../lib/SML/sml.h"
 
 #include "../../lib/argtable/argtable3.h"
 #include "../../lib/tools/libtools.h"
+
+
 
 void usage(char *progname, void *argtable) {
       printf("\nUsage:\n\t%s", progname);

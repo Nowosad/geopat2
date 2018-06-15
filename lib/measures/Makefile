@@ -7,7 +7,6 @@ COMMON = measures_interface.c geopat_compatibility.c emd.c
 COMMON_O = $(COMMON:%.c=%.o)
 HEADERS = $(shell ls *.h)
 
-
 all install: $(PROG).a
 
 $(PROG).a: $(MEASURES_O) $(COMMON_O)
@@ -22,12 +21,8 @@ measures_interface.o: measures_interface.c
 geopat_compatibility.o: geopat_compatibility.c
 	$(CC) $(CFLAGS) $(LIBCFLAGS) -c geopat_compatibility.c
 	
-emd.c: emd.c
+emd.o: emd.c
 	$(CC) $(CFLAGS) $(LIBCFLAGS) -c emd.c
-
-install: $(PROG).a
-	mv -f $(PROG).* ../../../lib
-	cp -f measures.h ../../../include
 
 clean:
 	rm -f *.o $(PROG).a

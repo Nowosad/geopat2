@@ -3,7 +3,7 @@ SUBDIRS= \
 gpat_compare \
 gpat_distmtx \
 gpat_globnorm \
-gpat_grd2txt \
+gpat_grid2txt \
 gpat_gridhis \
 gpat_gridts \
 gpat_pointshis \

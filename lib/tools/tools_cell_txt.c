@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include <sml.h>
+#include "../../lib/SML/sml.h"
 
 /*
 void write_cell_txt(FILE *f, double x, double y, char *desc, void *cell, SML_DATA_HEADER *dh) {
@@ -96,11 +96,11 @@ char *create_fname(char *desc) {
 }
 
 int read_xy_txt(int line, FILE *f, double *x, double *y, char *desc, int max_size) {
-  char format[20];
+  // char format[20];
   int i = fscanf(f,"%lf,%lf",x,y);
   desc[0] = '\0';
-  sprintf(format,",%%%d[^\n]%%n",max_size-1);
-  fscanf(f,format,desc);
+  // sprintf(format,",%%%c[^\n]%%n",max_size-1);
+  fscanf(f,",%20[^\n]",desc);
   if(strlen(desc)==0)
     sprintf(desc,"loc %05d",line);
   fscanf(f,"%*c");

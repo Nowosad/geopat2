@@ -1,5 +1,8 @@
 language: c
 
+os:
+  - linux
+
 sudo: required
 
 install:
@@ -7,13 +10,7 @@ install:
    - sudo apt-get --yes --force-yes update -qq
    - sudo apt-get install --yes libgdal-dev
    - sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/local.conf'
-   - wget http://sil.uc.edu/cms/data/uploads/software_data/GPAT2/ezGDAL.tar.gz
-   - tar zxvf ezGDAL.tar.gz
-   - pushd ezGDAL && make && sudo make install && popd
-   - wget http://sil.uc.edu/cms/data/uploads/software_data/GPAT2/SML.tar.gz
-   - tar zxvf SML.tar.gz
-   - pushd SML && make && sudo make install && popd
-   - sudo ldconfig
+#   - sudo ldconfig
 
 script:
   - make

@@ -12,7 +12,7 @@
  *
  *****************************************************************************/
 #include <stdlib.h>
-#include <ezgdal.h>
+#include "../../lib/ezGDAL/ezgdal.h"
 #include <stdarg.h>
 
 #include "signature_geopat_compatibility.h"

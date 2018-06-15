@@ -1,9 +1,9 @@
 
-PROG = libtools
+PROG = libezgdal
 
-COMMON = tools_common.c tools_cell_txt.c
+COMMON =  ezgdal.c
 COMMON_O = $(COMMON:%.c=%.o)
-HEADERS = tools_common.h tools_cell_txt.h
+HEADERS = ezgdal.h
 
 all install: $(PROG).h $(PROG).a
 
@@ -18,3 +18,4 @@ $(COMMON_O): $(COMMON) $(HEADERS)
 
 clean:
 	rm -f *.o $(PROG).h $(PROG).a
+	

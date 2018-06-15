@@ -10,7 +10,7 @@
  *
  *****************************************************************************/
 #include <math.h>
-#include <ezgdal.h>
+#include "../../lib/ezGDAL/ezgdal.h"
 #include <assert.h>
 #include <stdarg.h>
 

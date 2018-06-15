@@ -1,7 +1,7 @@
 /****************************************************************************
  *
  * PROGRAM:	gpat_pointshis - part of GeoPAT 2
- * AUTHOR(S):	Pawel Netzel
+ * AUTHOR(S):	Pawel Netzel, Jakub Nowosad
  * PURPOSE:	program for calculating a signature of a surrounding of a point
  *		or a set of points;
  *		functionality based on p.sig.point from
@@ -22,8 +22,8 @@
 #include <math.h>
 #include <omp.h>
 
-#include <ezgdal.h>
-#include <sml.h>
+#include "../../lib/ezGDAL/ezgdal.h"
+#include "../../lib/SML/sml.h"
 
 #include "../../lib/argtable/argtable3.h"
 #include "../../lib/signatures/signatures.h"
@@ -49,7 +49,7 @@ int main(int argc, char **argv) {
     int ninputs;
 
     int size_val = 150;
-    int level_val = 0;
+    int level_val;
     signature_func *sign_func = get_signature("cooc");
     signature_len_func *sign_len_func = get_signature_len("cooc");
     normalization_func *norm_func = get_normalization_method("pdf");
@@ -116,22 +116,6 @@ int main(int argc, char **argv) {
       ninputs=inp->count;
     }
 
-    if(sign->count>0 && strcmp(sign->sval[0],"fdec")==0) {
-      if((size_val != 0) && ((size_val & (~size_val + 1)) != size_val)) {
-        printf("\nFor the full decomposition, size has to be a power of two.\n\n");
-        exit(0);
-      }
-    
-      if(lvl->count>0) {
-        level_val = lvl->ival[0];
-        if(level_val<0 || (1<<(level_val-1))>size_val) {
-          printf("\nFor the full decomposition, 2^level cannot be greater then size.\nThe 'level' parameter is corrected by program.\n\n");
-          level_val = 0;
-        }
-      }
-    }
-
-
     if(norm->count > 0) {
       norm_func = get_normalization_method((char *)(norm->sval[0]));
       /* signature not found */
@@ -151,6 +135,27 @@ int main(int argc, char **argv) {
         printf("\nSize can not be less then 10\n\n");
         exit(0);
       }
+    }
+    
+    if(sign->count>0 && strcmp(sign->sval[0],"fdec")==0) {
+        if((size_val != 0) && ((size_val & (~size_val + 1)) != size_val)) {
+            printf("\nFor the full decomposition, size has to be a power of two.\n\n");
+            exit(0);
+        }
+        
+        // calculate the full decomposition level
+        int max_level_val = log2(size_val);
+        
+        if(lvl->count>0) {
+            level_val = lvl->ival[0];
+            if(level_val<0 || level_val>max_level_val) {
+                printf("\nFor the full decomposition, 2^level cannot be greater than the size.\nThe 'level' parameter is corrected by program.\n\n");
+                level_val = max_level_val;
+            } 
+        } else {
+            // if level is not set
+            level_val = max_level_val;
+        }
     }
 
     if(!((x->count>0 && y->count>0) || (xy->count>0))) {
@@ -244,7 +249,6 @@ printf("r: %d, c: %d, n: %d, len: %d, hist: %d, mx: %d, max: %lf, min: %lf\n",ro
       fxy = fopen((char *)xy->sval[0],"r");
       int line = 1;
       while(read_xy_txt(line++,fxy,&coord_x,&coord_y,desc_text, MAX_DESC_LEN)) {
-
 
         col = ezgdal_xy2c(input_layers[0],coord_x,coord_y) - size_val/2;
         row = ezgdal_xy2r(input_layers[0],coord_x,coord_y) - size_val/2;

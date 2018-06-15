@@ -12,7 +12,7 @@
  *
  *****************************************************************************/
 #include <stdlib.h>
-#include <ezgdal.h>
+#include "../../lib/ezGDAL/ezgdal.h"
 #include <math.h>
 #include <stdarg.h>
 

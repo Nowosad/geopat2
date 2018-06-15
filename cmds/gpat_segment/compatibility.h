@@ -14,7 +14,7 @@
  *****************************************************************************/
 
 #include <stdio.h>
-#include <sml.h>
+#include "../../lib/SML/sml.h"
 
 #define CELL_TYPE 0
 

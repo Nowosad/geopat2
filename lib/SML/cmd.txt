@@ -1,0 +1,3 @@
+cl smllib.c /DSMLLIB_EXPORTS /link /DLL /out:libsml.dll
+
+cl utils.c ezgdal.c /DEZGDAL_EXPORTS -Ic:\data\include gdal_i.lib /link /DLL /out:libezgdal.dll /LIBPATH:c:\data\lib
