@@ -14,6 +14,7 @@ before_install:
    - sudo apt-get install --yes libgdal-dev;
    - sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/local.conf';
     fi
+  - if [ "${TRAVIS_OS_NAME}" == "osx" ]; then brew install llvm; fi
 
 script:
   - make
