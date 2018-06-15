@@ -1,5 +1,9 @@
 # Version 2.1
 
+## 2018-06-15
+
+- Version 2.1 was published
+
 ## 2018-05-18
 
 - gpat_grd2txt renamed to gpat_grid2txt
