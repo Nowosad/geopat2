@@ -1,24 +1,16 @@
-language: generic
+language: c
+
+os:
+  - linux
 
 sudo: required
 
-matrix:
-  include:
-    - os: osx
-      osx_image: xcode8
-      env:
-        - MATRIX_EVAL="brew update && brew install llvm --with-clang"    
-    - os: linux
-
-before_install:
-  - eval "${MATRIX_EVAL}"
-  - if [[ $TRAVIS_OS_NAME == linux ]]; then
-   sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes;
-   sudo apt-get --yes --force-yes update -qq;
-   sudo apt-get install --yes libgdal-dev;
-   sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/local.conf';
-    fi
-  - if [ "${TRAVIS_OS_NAME}" == "osx" ]; then brew install llvm; fi
+install:
+   - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
+   - sudo apt-get --yes --force-yes update -qq
+   - sudo apt-get install --yes libgdal-dev
+   - sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/local.conf'
+#   - sudo ldconfig
 
 script:
   - make
