@@ -2,13 +2,10 @@ language: c
 
 sudo: required
 
-compiler: gcc
-
 matrix:
   include:
     - os: osx
       osx_image: xcode8
-      compiler: gcc
       env:
         - MATRIX_EVAL="brew update && brew install gcc && CC=gcc-7 && CXX=g++-7"    
         - CXX='g++-7'
