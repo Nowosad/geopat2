@@ -21,8 +21,8 @@
 
 /* FULL DECOMPOSITION
  * Additional parameter "dc_level" - number of decomposition levels.
- * size at the most coarse level = 2^(dc_level+1)
- * Default dc_level=0 - all possible levels for given pattern size
+ * size at the most coarse level = 2^(dc_level+2)
+ * Default no dc_level - all possible levels for given pattern size
  * NOTE: decomposition requires square-shaped input pattern. */
 
 int isPowerOfTwo(int x)
@@ -53,9 +53,9 @@ int full_decompose_area(EZGDAL_LAYER* layer, EZGDAL_FRAME* f, DC_PARAMS* p, int 
 	int total_quads=p->dc_num_of_quads*p->dc_num_of_quads;
 	int ncats = layer->stats->map_max_val+1;
 	int nulls=0;
-	int** level_quads=malloc(p->dc_level*sizeof(int*));
+	int** level_quads=malloc((p->dc_level + 1)*sizeof(int*));
 	
-	for(l=0;l<p->dc_level;++l) //allocate memory for level_QUADS and init to 0
+	for(l=0;l<=p->dc_level;++l) //allocate memory for level_QUADS and init to 0
 		level_quads[l]=calloc((int)(total_quads/pow(4,l))*ncats,sizeof(int));
 
 	/* scan map */
@@ -70,7 +70,7 @@ int full_decompose_area(EZGDAL_LAYER* layer, EZGDAL_FRAME* f, DC_PARAMS* p, int 
 			}
 			cat_index=ezgdal_get_value_index(layer, category);
 			/* update quad's histogram at each level */
-			for(l=0;l<p->dc_level;++l){
+			for(l=0;l<=p->dc_level;++l){
 				quad_size_at_level=p->dc_base_size*(int)pow(2,l);
 				num_of_quads_at_level=p->dc_num_of_quads/(int)pow(2,l);
 				quad_index=(r/quad_size_at_level)*num_of_quads_at_level+(c/quad_size_at_level);
@@ -79,7 +79,7 @@ int full_decompose_area(EZGDAL_LAYER* layer, EZGDAL_FRAME* f, DC_PARAMS* p, int 
 	} //end for
 
 	/* update actual full_decomposition histograms */
-	for(l=0;l<p->dc_level;++l) {
+	for(l=0;l<=p->dc_level;++l) {
 		total_quads_at_level=total_quads/(int)pow(4,l);
 		quad_size_at_level=p->dc_base_size*(int)pow(2,l);
 		quad_area_at_level=quad_size_at_level*quad_size_at_level;
@@ -95,7 +95,7 @@ int full_decompose_area(EZGDAL_LAYER* layer, EZGDAL_FRAME* f, DC_PARAMS* p, int 
 		}
 	}
 
-	for(l=0;l<p->dc_level;++l)
+	for(l=0;l<=p->dc_level;++l)
 		free(level_quads[l]);
 	free(level_quads);
 
@@ -139,16 +139,19 @@ int full_decomposition(EZGDAL_FRAME **frames, int num_of_frames, double *signatu
 	pattern_size = f->rows;
 	if(pattern_size<min_size)
 		G_fatal_error("Full decomposition: pattern size must be at least %d.",min_size);
+	
+	//G_message("Pattern size: %d",f->rows); 
+	
 
 	/* custom or dynamic set of the most coarse level */
 
-	if(dc_level){ //custom
-		p->dc_level = dc_level;
-		p->dc_region_size = (int)pow(2, p->dc_level+1);
+	if(dc_level >= 0){ //custom
+	  p->dc_level = dc_level; 
+		p->dc_region_size = (int)pow(2, p->dc_level+2);
 		if(p->dc_region_size<min_size)
 			G_fatal_error("The most coarse level size must be between %d and pattern size (%d): %d.",min_size,pattern_size,p->dc_region_size);
 	}
-	else{ //dynamic - if dc_level==0
+	else{ //dynamic - if no dc_level
 		p->dc_region_size=2;
 		while(p->dc_region_size<=pattern_size){
 			p->dc_region_size*=2;
@@ -158,7 +161,7 @@ int full_decomposition(EZGDAL_FRAME **frames, int num_of_frames, double *signatu
 	}
 	p->dc_num_of_quads=p->dc_region_size/p->dc_base_size;
 
-	/*G_message("Number of decomposition levels: %d",p->dc_level); */
+	//G_message("Number of decomposition levels: %d",p->dc_level); 
 
 	/* end of parameters */
 
@@ -201,6 +204,6 @@ int full_decomposition_len(EZGDAL_LAYER **layers, int num_of_layers, ...) {
 	va_end(arg_list);
 	
 	/* # of levels x # of map categories x # of size divisions (hard-coded 3) */
-	return dc_level*ncats*3;
+	return (dc_level+1)*ncats*3;
 }
 

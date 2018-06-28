@@ -138,12 +138,20 @@ int main(int argc, char **argv) {
       }
       
       // calculate the full decomposition level
-      int max_level_val = log2(size_val);
-        
+      //int max_level_val = log2(size_val) - 1;
+      level_val = lvl->ival[0];
+      int max_level_val = (int)(log2(size_val/2)-1);
+      //int max_level_val = 0;
+      
+      printf("\Level '%i'.\n\n", level_val);
+      printf("\Size '%i' \n\n", size_val);
+      printf("\MAX '%i'.\n\n", max_level_val);
+      
+
       if(lvl->count>0) {
         level_val = lvl->ival[0];
         if(level_val<0 || level_val>max_level_val) {
-          printf("\nFor the full decomposition, 2^level cannot be greater than the size.\nThe 'level' parameter is corrected by program.\n\n");
+          printf("\nFor the full decomposition, 2^level cannot be greater or equal to the size.\nThe 'level' parameter is corrected by program.\n\n");
           level_val = max_level_val;
         } 
       } else {
@@ -151,7 +159,7 @@ int main(int argc, char **argv) {
           level_val = max_level_val;
       }
     }
-
+    
     if(shift->count > 0) {
       shift_val = shift->ival[0];
       if(shift_val<5) {
