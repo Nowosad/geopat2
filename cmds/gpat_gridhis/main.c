@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
 
     int size_val = 150;
     int shift_val = 100;
-    int level_val;
+    int level_val = 0;
     signature_func *sign_func = get_signature("cooc");
     signature_len_func *sign_len_func = get_signature_len("cooc");
     normalization_func *norm_func = get_normalization_method("pdf");
@@ -137,18 +137,12 @@ int main(int argc, char **argv) {
         exit(0);
       }
       
-      // calculate the full decomposition level
-      int max_level_val = log2(size_val);
-        
       if(lvl->count>0) {
         level_val = lvl->ival[0];
-        if(level_val<0 || level_val>max_level_val) {
-          printf("\nFor the full decomposition, 2^level cannot be greater than the size.\nThe 'level' parameter is corrected by program.\n\n");
-          level_val = max_level_val;
-        } 
-      } else {
-          // if level is not set
-          level_val = max_level_val;
+        if(level_val<0 || (1<<(level_val-1))>size_val) {
+          printf("\nFor the full decomposition, 2^level cannot be greater then size.\nThe 'level' parameter is corrected by program.\n\n");
+          level_val = 0;
+        }
       }
     }
 
