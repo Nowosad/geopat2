@@ -19,8 +19,35 @@ The GeoPAT 2 software and manual are available at http://sil.uc.edu/cms/index.ph
 
 ## Installation
 
-Installation instruction can be found in the [GeoPAT 2 manual](https://rawgit.com/Nowosad/geopat2_manual/master/output/GeoPAT2_Manual.pdf). 
-Additionally, the [.travis](https://github.com/Nowosad/geopat2/blob/master/.travis.yml) file contains code used for GeoPAT 2 installation.
+Installation instruction in detail can be found in the [GeoPAT 2 manual](https://rawgit.com/Nowosad/geopat2_manual/master/output/GeoPAT2_Manual.pdf). 
+
+### Windows
+
+The installer for Windows x64 is available at http://sil.uc.edu/cms/data/uploads/software_data/GPAT2/GPAT2setup.exe
+
+### Building from source code
+
+To build GeoPAT 2 from the source code, the development files for GDAL are required.
+They can be installed on Ubuntu using:
+
+```bash
+sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
+sudo apt-get --yes --force-yes update -qq
+sudo apt-get install --yes libgdal-dev
+```
+... or on Fedora with:
+
+```bash
+sudo dnf install gdal-devel
+```
+
+The source code of GeoPAT 2 is available at https://github.com/Nowosad/geopat2/archive/master.zip. 
+This archive should be unpacked, compiled and installed:
+
+```bash
+make
+sudo make install
+```
 
 ## How to cite GeoPAT 2
 
