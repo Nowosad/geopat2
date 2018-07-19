@@ -154,7 +154,7 @@ int main(int argc, char *argv[])
 
 	/* open and read grid */
     datainfo=malloc(sizeof(DATAINFO));
-    init_grid_datainfo(datainfo,(char *)(inp->sval[0]),"dupa");
+    init_grid_datainfo(datainfo,(char *)(inp->sval[0]),"apud");
     read_signatures_to_memory(datainfo);
     parameters->parameters = init_measure_parameters(datainfo->size_of_histogram,0); /* use distance, not similarity */
     
