@@ -42,9 +42,13 @@ sudo dnf install gdal-devel
 ```
 
 The source code of **GeoPAT** 2 is available at https://github.com/Nowosad/geopat2/archive/master.zip. 
-This archive should be unpacked, compiled and installed:
+This archive should be unpacked, compiled and installed, e.g. with:
 
 ```bash
+wget https://github.com/Nowosad/geopat2/archive/master.zip
+unzip master.zip
+mv geopat2-master geopat2
+cd geopat2
 make
 sudo make install
 ```
