@@ -57,6 +57,18 @@ sudo make install
 
 **Netzel P., Nowosad J., Jasiewicz J., Niesterowicz J, Stepinski T.**, 2018. *GeoPAT 2: user's manual*. Zenodo. http://doi.org/10.5281/zenodo.1291123
 
+## Blog posts
+
+Blog posts in the series introducing [GeoPAT 2 - a software for pattern-based spatial and temporal analysis](http://sil.uc.edu/cms/index.php?id=geopat2):
+
+1. [GeoPAT 2: Software for Pattern-Based Spatial and Temporal Analysis](/post/geopat-2-software-for-pattern-based-spatial-and-temporal-analysis)
+2. [Pattern-based Spatial Analysis - core ideas](/post/pattern-based-spatial-analysis-core-ideas)
+3. [Finding similar local landscapes](/post/geopat-2-search)
+4. [Quantifying temporal change of landscape pattern](/post/geopat-2-compare)
+5. [Pattern-based regionalization](/post/geopat-2-segmentation)
+6. [Moving beyond pattern-based analysis: Additional applications of GeoPAT 2](/post/geopat-2-extend)
+
+
 ## **GeoPAT** related papers
 
 List of the papers related to the **GeoPAT** software. The preprints can be found at http://sil.uc.edu/cms/index.php?id=journal-papers.
