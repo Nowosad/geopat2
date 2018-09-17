@@ -68,6 +68,10 @@ Blog posts in the series introducing [GeoPAT 2 - a software for pattern-based sp
 5. [Pattern-based regionalization](/post/geopat-2-segmentation)
 6. [Moving beyond pattern-based analysis: Additional applications of GeoPAT 2](/post/geopat-2-extend)
 
+## Workshop at GEOSTAT 2018
+
+- [Video](https://www.youtube.com/watch?v=_yKbVqR_Zfc)
+- [Slides](https://nowosad.github.io/geostat18/geostat18_nowosad)
 
 ## **GeoPAT** related papers
 
