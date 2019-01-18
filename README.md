@@ -23,7 +23,7 @@ Installation instruction in detail can be found in the [GeoPAT 2 manual](https:/
 
 ### Windows
 
-The installer for Windows x64 is available at http://sil.uc.edu/cms/data/uploads/software_data/GPAT2/GPAT2setup.exe
+The installer for Windows x64 is available at https://github.com/Nowosad/geopat2win/raw/master/GPAT2setup.exe
 
 ### Building from source code
 
