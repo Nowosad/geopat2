@@ -61,12 +61,13 @@ sudo make install
 
 Blog posts in the series introducing [GeoPAT 2 - a software for pattern-based spatial and temporal analysis](http://sil.uc.edu/cms/index.php?id=geopat2):
 
-1. [GeoPAT 2: Software for Pattern-Based Spatial and Temporal Analysis](/post/geopat-2-software-for-pattern-based-spatial-and-temporal-analysis)
-2. [Pattern-based Spatial Analysis - core ideas](/post/pattern-based-spatial-analysis-core-ideas)
-3. [Finding similar local landscapes](/post/geopat-2-search)
-4. [Quantifying temporal change of landscape pattern](/post/geopat-2-compare)
-5. [Pattern-based regionalization](/post/geopat-2-segmentation)
-6. [Moving beyond pattern-based analysis: Additional applications of GeoPAT 2](/post/geopat-2-extend)
+1. [GeoPAT 2: Software for Pattern-Based Spatial and Temporal Analysis](http://nowosad.github.io/post/geopat-2-software-for-pattern-based-spatial-and-temporal-analysis)
+2. [Pattern-based Spatial Analysis - core ideas](http://nowosad.github.io/post/pattern-based-spatial-analysis-core-ideas)
+3. [Finding similar local landscapes](http://nowosad.github.io/post/geopat-2-search)
+4. [Quantifying temporal change of landscape pattern](http://nowosad.github.io/post/geopat-2-compare)
+5. [Pattern-based regionalization](http://nowosad.github.io/post/geopat-2-segmentation)
+6. [Moving beyond pattern-based analysis: Additional applications of GeoPAT 2](http://nowosad.github.io/post/geopat-2-extend)
+7. [GeoPAT2: Entropy calculations for local landscapes](https://nowosad.github.io/post/geopat-2-ent/)
 
 ## Workshop at GEOSTAT 2018
 
