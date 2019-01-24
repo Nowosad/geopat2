@@ -59,8 +59,6 @@ sudo make install
 
 ## Blog posts
 
-Blog posts in the series introducing [GeoPAT 2 - a software for pattern-based spatial and temporal analysis](http://sil.uc.edu/cms/index.php?id=geopat2):
-
 1. [GeoPAT 2: Software for Pattern-Based Spatial and Temporal Analysis](http://nowosad.github.io/post/geopat-2-software-for-pattern-based-spatial-and-temporal-analysis)
 2. [Pattern-based Spatial Analysis - core ideas](http://nowosad.github.io/post/pattern-based-spatial-analysis-core-ideas)
 3. [Finding similar local landscapes](http://nowosad.github.io/post/geopat-2-search)
