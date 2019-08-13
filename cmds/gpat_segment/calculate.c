@@ -170,6 +170,13 @@ int add_histograms(DATAINFO* d, double* o, double* h, int num_of_areas)
 	return 0;
 }
 
+double interpolate(HEXGRID* hx, int layer, double distance)
+{
+  int index = (int)(distance*100);
+  return hx->quantiles[layer][index] + hx->tangents[layer][index]*(distance - index*0.01);
+}
+
+
 double calculate2(HEXGRID* hx, LOCAL_PARAMS* p, double** pair)
 {
 	/* this function is called whenever previously calculate was called */
@@ -183,8 +190,12 @@ double calculate2(HEXGRID* hx, LOCAL_PARAMS* p, double** pair)
 	int dims[1];
 
 	dims[0]=p->parameters->size_of_histogram;
-	if(hx->num_of_subhistograms==1)
-		result=1.-calc(pair,2,p->parameters->size_of_histogram,1,dims);
+
+	if(hx->num_of_subhistograms==1) {
+	  c = calc(pair,2,p->parameters->size_of_histogram,1,dims);
+	  result=1.-interpolate(hx,0,c);
+	}
+	
 	else {
 		int set_0=0;
 		for(i=0;i<hx->num_of_subhistograms;++i) {
@@ -193,7 +204,11 @@ double calculate2(HEXGRID* hx, LOCAL_PARAMS* p, double** pair)
 			p->parameters->size_of_histogram=hx->sh_size_of_histogram[i];
 
 			dims[0]=p->parameters->size_of_histogram;
-			c=1.-calc(subpair,2,p->parameters->size_of_histogram,1,dims);
+			//c=1.-calc(subpair,2,p->parameters->size_of_histogram,1,dims);
+			
+			c = calc(subpair,2,p->parameters->size_of_histogram,1,dims);
+			c = 1. - interpolate(hx,i,c);
+			
 			//c=1.-calc(subpair,p->parameters);
 			if(p->all_layers) {
 				result=MAX(result,c);

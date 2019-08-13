@@ -43,6 +43,8 @@ struct area {
 	double homogenity; /* acually heterogeneity */
 	double isolation;
 	int id;
+	int num_of_local_neighbors;
+	int* local_neighborhood;
 
 	/* ========================= */
 	struct fifo* neighbors;
@@ -82,6 +84,10 @@ typedef struct {
 	int** hex_neigborhoods;  /* for brick topology only */
 	int** histogram_ids;
 	double** histograms;
+	/* recalculate distances to quantiles */
+	double** tangents;
+	double** quantiles;
+	
 } HEXGRID;
 
 typedef struct {
@@ -130,12 +136,14 @@ int read_histograms_to_memory(DATAINFO* d, LOCAL_PARAMS* p);
 int* sample_histogram_ids(struct fifo* queue , int num_of_samples);
 int add_histograms(DATAINFO* d, double* o, double* h, int num_of_areas);
 int compare_grids_datainfo(DATAINFO* a, DATAINFO* b);
+double interpolate(HEXGRID* hx, int layer, double distance);
 double calculate2(HEXGRID* hx, LOCAL_PARAMS* p, double** pair);
 int get_num_of_grids(char* files[]);
 
 /* seeds */
 int find_fisher_cut(DIST** distances,int num_of_dists,int first);
 double* create_thresholds_map(DATAINFO* d, HEXGRID* hx, LOCAL_PARAMS* pars, struct area** areas);
+int hex_find_quantiles(HEXGRID* hx, LOCAL_PARAMS* p, struct area** areas);
 
 /* menu */
 /*

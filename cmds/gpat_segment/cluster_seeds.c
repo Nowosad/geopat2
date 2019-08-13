@@ -43,13 +43,167 @@ struct fifo* hex_get_extended_neighborhood(HEXGRID* hx, struct area** areas, int
 	return queue;
 }
 
+/* ################################################### */
+/* recalculate to quantile */
+
+int hex_get_local_neighborhood(HEXGRID* hx, LOCAL_PARAMS* p, struct area** areas, int index)
+{
+  if(!areas[index]) {
+    return -1;
+  }
+  struct fifo* queue=hex_get_extended_neighborhood(hx,areas,index);
+  areas[index]->num_of_local_neighbors = queue_length(queue);
+  areas[index]->local_neighborhood = convert_queue_to_table(queue);
+  clear_queue(queue);
+  return 0;
+  
+}
+
+int hex_find_quantiles(HEXGRID* hx, LOCAL_PARAMS* p, struct area** areas)
+{
+  int ncells=hx->nareas;
+  int i,j,k;
+  int num_of_pairs=0;
+  int num_of_quantiles = 100;
+  distance_func* calc=p->calculate;
+  int dims[1];
+  
+  dims[0]=p->parameters->size_of_histogram;
+  
+  for(i=0;i<ncells;++i) {
+    if(areas[i]) {
+      //hex_get_local_neighborhood(hx,p,areas,i);
+      struct fifo* queue=hex_get_extended_neighborhood(hx,areas,i);
+      areas[i]->num_of_local_neighbors = queue_length(queue);
+      areas[i]->local_neighborhood = convert_queue_to_table(queue);
+      clear_queue(queue);
+      
+      int* neighbors = areas[i]->local_neighborhood;
+      int num_of_neighbors = areas[i]->num_of_local_neighbors;
+      for(j=0;j<num_of_neighbors;++j) {
+        if(neighbors[j]>i)
+          num_of_pairs++;
+        
+      }
+    }
+  } /* end for i */
+
+double** distances;
+  num_of_pairs+=2; /* add one to store zero and one at the begining and end of the list */
+distances = malloc(hx->num_of_subhistograms*sizeof(double*));
+for(i=0;i<hx->num_of_subhistograms;++i) {
+  distances[i] = malloc(num_of_pairs*sizeof(double));
+}
+
+double* pair[]={NULL,NULL,NULL};
+int l=0; /* num of possible pairs, not greater than num_of_pairs */
+for(i=0;i<ncells;++i) {
+  if(areas[i]) {
+    int* neighbors = areas[i]->local_neighborhood;
+    int num_of_neighbors = areas[i]->num_of_local_neighbors;
+    pair[0]=hex_use_histogram(hx,i);
+    
+    for(j=0;j<num_of_neighbors;++j) {
+      if(neighbors[j]>i) {
+        pair[1]=hex_use_histogram(hx,neighbors[j]);
+        int length=0;
+        
+        for(k=0;k<hx->num_of_subhistograms;++k) {
+          double* subpair[]={pair[0]+length,pair[1]+length,NULL}; /* length is a shift of the pointer */
+p->parameters->size_of_histogram=hx->sh_size_of_histogram[k];
+distances[k][l]=calc(subpair,2,p->parameters->size_of_histogram,1,dims);
+length+=hx->sh_size_of_histogram[k];
+        }
+        l++;
+      }
+    }
+  }
+}
+
+/*Distributions must start with 0 and end with 1 to cover entire range of the data
+ * so 0 and 1 will be added manually it has minimal influence on quantiles */
+for(k=0;k<hx->num_of_subhistograms;++k) {
+  distances[k][l]=0;/* add zero at the end  to align distributions sort will move it to the begining*/
+distances[k][l+1]=1; /* add 1 at the end  to align distributions sort will move it to the end */
+qsort(distances[k],num_of_pairs,sizeof(double),sort_double_asc);
+}
+
+double* list_of_quantiles;
+list_of_quantiles = malloc(num_of_pairs*sizeof(double));
+double min_quantile = 1./(num_of_pairs-1);
+for(i=0;i<num_of_pairs;++i)
+  list_of_quantiles[i]=min_quantile*i;
+
+/*
+ for(j=0;j<num_of_pairs;++j) {
+ printf("%1.4f,",list_of_quantiles[j]);
+ for(k=0;k<hx->num_of_subhistograms;++k) {
+ printf("%1.4f,",distances[k][j]);
+ }
+ printf("\b\n");
+ }
+ */
+
+hx->quantiles =  malloc(hx->num_of_subhistograms*sizeof(double*));
+hx->tangents =  malloc(hx->num_of_subhistograms*sizeof(double*));
+
+/* i - index of LUT
+ * j - index of local quantile and distance
+ * l - layer
+ */
+
+double q, tg;
+num_of_quantiles++; /* to store lat quantile */
+for(l=0;l<hx->num_of_subhistograms;++l) {
+  hx->quantiles[l] = malloc(num_of_quantiles*sizeof(double));
+  hx->tangents[l] = malloc(num_of_quantiles*sizeof(double));
+  k=0;
+  hx->quantiles[l][0]=0;
+  
+  /* distances to quantiles */
+  for(i=1;i<num_of_quantiles-1;++i) {
+    q=i*0.01;
+    for(j=k;j<num_of_pairs-1;++j) {
+      if(distances[l][j] <=q && distances[l][j+1]>q) {
+        tg = (list_of_quantiles[j+1]-list_of_quantiles[j])/(distances[l][j+1]-distances[l][j]);
+        hx->quantiles[l][i] = list_of_quantiles[j] + tg * (q - distances[l][j]);
+        k=j; /* do not start from the begining */
+  break;
+      }
+    }
+  }
+  hx->quantiles[l][i]=1;
+  
+  /*quantiles to tangents  tangents */
+  for(i=0;i<num_of_quantiles-1;++i) {
+    hx->tangents[l][i] = (hx->quantiles[l][i+1]-hx->quantiles[l][i])/0.01;
+  }
+  hx->tangents[l][i] = 0;
+  
+}
+/*
+ for(i=0;i<num_of_quantiles;++i) {
+ printf("%f: ",i*0.01);
+ for(l=0;l<hx->num_of_subhistograms;++l) {
+ printf("%f,",hx->quantiles[l][i]);
+ //printf("%f,",hx->tangents[l][i]);
+ }
+ printf("\n");
+ }
+ */
+
+return 0;
+
+}
+
+
 //################################################
 
 double hex_get_local_heterogeneity2(HEXGRID* hx, LOCAL_PARAMS* p, struct area** areas, int index)
 {
-	struct fifo* queue;
-	int num_of_neighbors;
-	int* neighbors;
+	//struct fifo* queue;
+	//int num_of_neighbors;
+	//int* neighbors;
 	int size_of_triangle;
 	int* triangle;
 	double* distances;
@@ -63,9 +217,9 @@ double hex_get_local_heterogeneity2(HEXGRID* hx, LOCAL_PARAMS* p, struct area** 
 	if(!areas[index])
 		return -1;
 
-	queue=hex_get_extended_neighborhood(hx,areas,index);
-	num_of_neighbors=queue_length(queue);
-	neighbors=convert_queue_to_table(queue);
+	//queue=hex_get_extended_neighborhood(hx,areas,index);
+	int num_of_neighbors = areas[index]->num_of_local_neighbors;
+	int* neighbors = areas[index]->local_neighborhood;
 
 	/* the code works well with triangle */
 	size_of_triangle=num_of_neighbors*(num_of_neighbors-1)/2;
@@ -242,8 +396,8 @@ double calculate_threshold(DIST** dists, int num_of_neighbors)
 double hex_get_local_heterogeneity(HEXGRID* hx, LOCAL_PARAMS* p, struct area** areas, int index)
 {
 	struct fifo* queue;
-	int size_of_extended_neighborhood;
-	int* extended_neighbors;
+	//int size_of_extended_neighborhood;
+	//int* extended_neighbors;
 	int i;
 	DIST* extended_distances;
 	DIST** pointers_to_dists;
@@ -255,14 +409,16 @@ double hex_get_local_heterogeneity(HEXGRID* hx, LOCAL_PARAMS* p, struct area** a
 	if(!areas[index])
 		return -1;
 
-	queue=hex_get_extended_neighborhood(hx,areas,index);
-	size_of_extended_neighborhood=queue_length(queue);
+	//queue=hex_get_extended_neighborhood(hx,areas,index);
+	int size_of_extended_neighborhood = areas[index]->num_of_local_neighbors;
+	int* extended_neighbors = areas[index]->local_neighborhood;
+	
 	if(size_of_extended_neighborhood<1) {
 		areas[index]->similarity_threshold=1;
 		free(queue);
 		return 3; /* send to the end of queue */
 	}
-	extended_neighbors=convert_queue_to_table(queue);
+	//extended_neighbors=convert_queue_to_table(queue);
 
 	extended_distances=(DIST*)malloc(sizeof(DIST)*size_of_extended_neighborhood);
 	pointers_to_dists=(DIST**)malloc(sizeof(DIST*)*size_of_extended_neighborhood);
@@ -295,8 +451,8 @@ double hex_get_local_heterogeneity(HEXGRID* hx, LOCAL_PARAMS* p, struct area** a
 
 	free(extended_distances);
 	free(pointers_to_dists);
-	free(extended_neighbors);
-	clear_queue(queue);
+	free(areas[index]->local_neighborhood);
+	areas[index]->local_neighborhood=NULL;
 
 	return sequence_position;
 }

@@ -221,6 +221,8 @@ int main(int argc, char *argv[])
     results = hex_init_results(hexgrid);
     parameters->parameters = init_measure_parameters(datainfo[num_of_layers-1]->size_of_histogram,0); /* we will use distance instead of similarity */
 
+    hex_find_quantiles(hexgrid,parameters,areas);
+    
    /* seeding starts here */
     seeds = hex_find_seeds(hexgrid,parameters,areas,&num_of_seeds);
 
