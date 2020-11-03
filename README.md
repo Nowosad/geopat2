@@ -15,7 +15,7 @@ This enables spatial analysis such as search, change detection, segmentation, an
 
 ![](https://github.com/Nowosad/geopat2_manual/raw/master/figs/logo.png)
 
-The **GeoPAT** 2 software and manual are available at http://sil.uc.edu/cms/index.php?id=geopat2.
+The **GeoPAT** 2 software and manual are available at http://sil.home.amu.edu.pl/index.php?id=geopat2.
 
 ## Installation
 
@@ -74,7 +74,7 @@ sudo make install
 
 ## **GeoPAT** related papers
 
-List of the papers related to the **GeoPAT** software. The preprints can be found at http://sil.uc.edu/cms/index.php?id=journal-papers.
+List of the papers related to the **GeoPAT** software. The preprints can be found at http://sil.home.amu.edu.pl/index.php?id=journal-papers.
 
 - Nowosad, J. and Stepinski, T. F., 2018. Towards machine ecoregionalization of Earth's landmass using pattern segmentation method. International Journal of Applied Earth Observation and Geoinformation, 69, pp.110-118.
 - Nowosad J., Stepinski  T. F., 2018. Global inventory of landscape patterns and latent variables of landscape spatial configuration, Ecological Indicators 89, pp. 159-167.
