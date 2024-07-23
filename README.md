@@ -25,6 +25,11 @@ Installation instruction in detail can be found in the [GeoPAT 2 manual](https:/
 
 The installer for Windows x64 is available at https://github.com/Nowosad/geopat2win/raw/master/GPAT2setup.exe
 
+### MacOS
+
+The GeoPAT 2 Unix executable programs, compiled for Mac OS with the Apple M1 Max processor (an ARM64 architecture), are available at https://github.com/Nowosad/geopat2mac
+These programs can be run from a shell script, or with R's `system` command.
+
 ### Building from source code
 
 To build **GeoPAT** 2 from the source code, the development files for GDAL are required.
@@ -72,6 +77,7 @@ sudo make install
 - [Video](https://www.youtube.com/watch?v=_yKbVqR_Zfc)
 - [Slides](https://nowosad.github.io/geostat18/geostat18_nowosad)
 
+<!--
 ## **GeoPAT** related papers
 
 List of the papers related to the **GeoPAT** software. The preprints can be found at http://sil.home.amu.edu.pl/index.php?id=journal-papers.
@@ -93,7 +99,9 @@ List of the papers related to the **GeoPAT** software. The preprints can be foun
 - Netzel, P. and Stepinski, T.F., 2014, July. Pattern-based assessment of 2001/2006 land cover change over the entire United States. In Geoscience and Remote Sensing Symposium (IGARSS), 2014 IEEE International (pp. 4188-4191). IEEE.
 - Stepinski, T.F., Netzel, P. and Jasiewicz, J., 2014. LandEx—a GeoWeb tool for query and retrieval of spatial patterns in land cover datasets. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 7(1), pp.257-266.
 - Jasiewicz, J. and Stepinski, T.F., 2013. Example-based retrieval of alike land-cover scenes from NLCD2006 database. IEEE Geoscience and Remote Sensing Letters, 10(1), pp.155-159.
+-->
 
 ## Acknowledgments
 
-This work was supported by the University of Cincinnati Space Exploration Institute and by the grant NNX15AJ47G from the National Aeronautics and Space Administration.
+This work was supported by the University of Cincinnati Space Exploration Institute and by the grant NNX15AJ47G from the National Aeronautics and Space Administration (NASA).
+We also want to thank D G Rossiter for preparing and sharing the MacOS version of **GeoPAT** 2.
