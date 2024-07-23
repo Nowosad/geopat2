@@ -64,13 +64,13 @@ sudo make install
 
 ## Blog posts
 
-1. [GeoPAT 2: Software for Pattern-Based Spatial and Temporal Analysis](http://nowosad.github.io/post/geopat-2-software-for-pattern-based-spatial-and-temporal-analysis)
-2. [Pattern-based Spatial Analysis - core ideas](http://nowosad.github.io/post/pattern-based-spatial-analysis-core-ideas)
-3. [Finding similar local landscapes](http://nowosad.github.io/post/geopat-2-search)
-4. [Quantifying temporal change of landscape pattern](http://nowosad.github.io/post/geopat-2-compare)
-5. [Pattern-based regionalization](http://nowosad.github.io/post/geopat-2-segmentation)
-6. [Moving beyond pattern-based analysis: Additional applications of GeoPAT 2](http://nowosad.github.io/post/geopat-2-extend)
-7. [GeoPAT2: Entropy calculations for local landscapes](https://nowosad.github.io/post/geopat-2-ent/)
+1. [GeoPAT 2: Software for Pattern-Based Spatial and Temporal Analysis](https://jakubnowosad.com/posts/2018-06-18-geopat-2-software-for-pattern-based-spatial-and-temporal-analysis/)
+2. [Pattern-based Spatial Analysis - core ideas](https://jakubnowosad.com/posts/2018-07-06-pattern-based-spatial-analysis-core-ideas/)
+3. [Finding similar local landscapes](https://jakubnowosad.com/posts/2018-07-16-geopat-2-search/)
+4. [Quantifying temporal change of landscape pattern](https://jakubnowosad.com/posts/2018-07-24-geopat-2-compare/)
+5. [Pattern-based regionalization](https://jakubnowosad.com/posts/2018-08-13-geopat-2-segmentation/)
+6. [Moving beyond pattern-based analysis: Additional applications of GeoPAT 2](https://jakubnowosad.com/posts/2018-08-28-geopat-2-extend/)
+7. [GeoPAT2: Entropy calculations for local landscapes](https://jakubnowosad.com/posts/2019-01-20-geopat-2-ent/)
 
 ## Workshop at GEOSTAT 2018
 
