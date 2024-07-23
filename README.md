@@ -23,11 +23,11 @@ Installation instruction in detail can be found in the [GeoPAT 2 manual](https:/
 
 ### Windows
 
-The installer for Windows x64 is available at https://github.com/Nowosad/geopat2win/raw/master/GPAT2setup.exe
+The installer for Windows x64 is available at <https://github.com/Nowosad/geopat2win/raw/master/GPAT2setup.exe>.
 
 ### MacOS
 
-The GeoPAT 2 Unix executable programs, compiled for Mac OS with the Apple M1 Max processor (an ARM64 architecture), are available at https://github.com/Nowosad/geopat2mac
+The GeoPAT 2 Unix executable programs, compiled for Mac OS with the Apple M1 Max processor (an ARM64 architecture), are available at <https://github.com/Nowosad/geopat2mac>.
 These programs can be run from a shell script, or with R's `system` command.
 
 ### Building from source code
