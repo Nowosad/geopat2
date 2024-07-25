@@ -15,7 +15,7 @@ This enables spatial analysis such as search, change detection, segmentation, an
 
 ![](https://github.com/Nowosad/geopat2_manual/raw/master/figs/logo.png)
 
-The **GeoPAT** 2 software and manual are available at http://sil.home.amu.edu.pl/index.php?id=geopat2.
+<!--The **GeoPAT** 2 software and manual are available at http://sil.home.amu.edu.pl/index.php?id=geopat2.-->
 
 ## Installation
 
